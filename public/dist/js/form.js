@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    //edit user
     $('#form_settings').submit(function(e){
         e.preventDefault();
         // var name = $('#inputName').val();
@@ -54,6 +55,7 @@ $(document).ready(function(){
                 }
         });
     });
+    //toggle change avatar
     $('#toggle-btn').click(function(){
         $('.form-avatar').toggle('slow');
         var $this = $(this);
@@ -64,10 +66,12 @@ $(document).ready(function(){
             $this.text('Cancel');
         }
     });
+    //make change avatar
     $('#exampleInputFile').change(function(e){
         var fileName = e.target.files[0].name;
         $('#label-img').text(fileName);
     });
+    //sending letter leave of absence
     $('#setting-letter').submit(function(e){
         e.preventDefault();
         var formData= new FormData(this);
@@ -84,6 +88,60 @@ $(document).ready(function(){
                 success:function(data){
                     alert(data);
                 }
+        });
+    });
+    //add data to approve form
+    $('.approve').click(function(e){
+        e.preventDefault()
+        var id = $(this).data('id');
+        $('#confirm_approve').data('id_letter',id);
+    });
+    //add data to dissaprove form
+    $('.dissapprove').click(function(e){
+        e.preventDefault()
+        var id = $(this).data('id');
+        $('#saveChange').data('id',id);
+    });
+    //Confirm reason dissapprove
+    $('#saveChange').click(function(e){
+        e.preventDefault()
+        var id = $(this).data('id');
+        var reason = $('#inputReason').val();
+        var _token = $(this).data('token');
+        $.ajax({
+            url:$(this).data('urf'),
+            method:"POST",
+            data:{
+                id_letter:id,
+                reason:reason,
+                _token:_token
+            },
+            success:function(data){
+                alert(data);
+                $('.tr-'+id).text('reject');
+                $('.tr-reason-'+id).text(reason);
+                $('#approve-'+id).attr('disabled','disabled');
+                $('#dissapprove-'+id).attr('disabled','disabled');
+            }
+        });
+    });
+    //confirm approve
+    $('#confirm_approve').click(function(){
+        var id = $(this).data('id_letter');
+        var _token = $(this).data('token');
+        $.ajax({
+            url:$(this).data('urf'),
+            method:"POST",
+            data:{
+                id_letter:id,
+                _token:_token
+            },
+            success:function(data){
+                alert(data);
+                $('.tr-'+id).text('aprroved');
+                $('#approve-'+id).attr('disabled','disabled');
+                $('#dissapprove-'+id).attr('disabled','disabled');
+            }
         });
     });
 });

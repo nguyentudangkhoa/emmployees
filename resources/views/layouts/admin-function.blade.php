@@ -5,7 +5,7 @@
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Profile</h1>
+                  <h1>Admin Page</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
@@ -159,7 +159,7 @@
                   <div class="card">
                     <div class="card-header p-2">
                       <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Letter</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Approve absence Letter</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                         <li class="nav-item"><a class="nav-link" href="#letter" data-toggle="tab">Create Absence Letter</a></li>
                       </ul>
@@ -183,6 +183,7 @@
                                   <thead>
                                     <tr>
                                       <th>ID</th>
+                                      <th>Employee name</th>
                                       <th>Reason</th>
                                       <th>From date</th>
                                       <th>To date</th>
@@ -190,20 +191,34 @@
                                       <th>Reason dissapprove</th>
                                       <th>Created at</th>
                                       <th>Updated at</th>
+                                      <th>Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                   @foreach ($letter_form as $user_item)
-                                    <tr>
-                                      <td>{{$user_item->id}}</td>
-                                      <td>{{$user_item->reason}}</td>
-                                      <td>{{$user_item->from_date}}</td>
-                                      <td>{{$user_item->to_date}}</td>
-                                      <td>{{$user_item->status}}</td>
-                                      <td>{{$user_item->reason_disapprove}}</td>
-                                      <td>{{$user_item->created_at}}</td>
-                                      <td>{{$user_item->updated_at}}</td>
-                                    </tr>
+                                    <form action="" class="form-{{$user_item->id}}" method="post">
+                                        <tr>
+                                        <td>{{$user_item->id}}</td>
+                                        <td>{{$user_item->user_name}}</td>
+                                        <td>{{$user_item->reason}}</td>
+                                        <td>{{$user_item->from_date}}</td>
+                                        <td>{{$user_item->to_date}}</td>
+                                        <td><p class="tr-{{$user_item->id}}">{{$user_item->status}}</p></td>
+                                        <td><p class="tr-reason-{{$user_item->id}}">{{$user_item->reason_disapprove}}</p></td>
+                                        <td>{{$user_item->created_at}}</td>
+                                        <td>{{$user_item->updated_at}}</td>
+                                        <td><div class="btn-group">
+                                            @if($user_item->status != "approved" && $user_item->status != "reject")
+                                            <button type="submit" data-id={{$user_item->id}} id="approve-{{$user_item->id}}" class="approve btn btn-danger" data-toggle="modal" data-target="#modal-sm">Approve</button>
+                                            <button type="submit" data-id={{$user_item->id}} id="dissapprove-{{$user_item->id}}" class="dissapprove btn btn-info" data-toggle="modal" data-target="#modal-lg">Dissapprove</button>
+                                            @elseif($user_item->status == "approved" || $user_item->status == "reject")
+                                            <button type="submit" data-id={{$user_item->id}} id="approve-{{$user_item->id}}" class="approve btn btn-danger" data-toggle="modal" data-target="#modal-sm" disabled>Approve</button>
+                                            <button type="submit" data-id={{$user_item->id}} id="dissapprove-{{$user_item->id}}" class="dissapprove btn btn-info" data-toggle="modal" data-target="#modal-lg" disabled>Dissapprove</button>
+                                            @endif
+                                            </div>
+                                        </td>
+                                        </tr>
+                                    </form>
                                   @endforeach
                                   </tbody>
                                 </table>
@@ -218,6 +233,60 @@
                   <!-- /.card -->
                 </div>
                         <!-- /.tab-pane -->
+
+
+<!---->
+<!-- /.modal -->
+
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Reason</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <textarea class="form-control inputReason" name="reason" id="inputReason" placeholder="Reason"></textarea>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" id="saveChange" class="btn btn-primary" data-urf="{{route('dissapprove')}}" data-token="{{ csrf_token() }}">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+  <!-- /.modal -->
+
+  <div class="modal fade" id="modal-sm">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirm Approve</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure&hellip;</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" id="confirm_approve" class="btn btn-primary" data-urf="{{route('approve')}}" data-token="{{ csrf_token() }}">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+  <!---->
+
+
 
                         <div class="tab-pane" id="settings">
                           <form class="form-horizontal" id="form_settings" method="POST" enctype="multipart/form-data">
@@ -362,7 +431,7 @@
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,
-                "responsive": true,
+                "responsive": false,
                 "paginate":false,
               });
               $("#example3").DataTable({
@@ -371,7 +440,7 @@
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,
-                "responsive": true,
+                "responsive": false,
                 "paginate":false,
               });
               $('#example2').DataTable({
@@ -380,9 +449,164 @@
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,
-                "responsive": true,
+                "responsive": false,
                 "paginate":false,
               });
             });
           </script>
+<script type="text/javascript">
+    $(function() {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+      });
+
+      $('.swalDefaultSuccess').click(function() {
+        Toast.fire({
+          icon: 'success',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultInfo').click(function() {
+        Toast.fire({
+          icon: 'info',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultError').click(function() {
+        Toast.fire({
+          icon: 'error',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultWarning').click(function() {
+        Toast.fire({
+          icon: 'warning',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultQuestion').click(function() {
+        Toast.fire({
+          icon: 'question',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+
+      $('.toastrDefaultSuccess').click(function() {
+        toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+      });
+      $('.toastrDefaultInfo').click(function() {
+        toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+      });
+      $('.toastrDefaultError').click(function() {
+        toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+      });
+      $('.toastrDefaultWarning').click(function() {
+        toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+      });
+
+      $('.toastsDefaultDefault').click(function() {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultTopLeft').click(function() {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          position: 'topLeft',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultBottomRight').click(function() {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          position: 'bottomRight',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultBottomLeft').click(function() {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          position: 'bottomLeft',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultAutohide').click(function() {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          autohide: true,
+          delay: 750,
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultNotFixed').click(function() {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          fixed: false,
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultFull').click(function() {
+        $(document).Toasts('create', {
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          icon: 'fas fa-envelope fa-lg',
+        })
+      });
+      $('.toastsDefaultFullImage').click(function() {
+        $(document).Toasts('create', {
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          image: '../../dist/img/user3-128x128.jpg',
+          imageAlt: 'User Picture',
+        })
+      });
+      $('.toastsDefaultSuccess').click(function() {
+        $(document).Toasts('create', {
+          class: 'bg-success',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultInfo').click(function() {
+        $(document).Toasts('create', {
+          class: 'bg-info',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultWarning').click(function() {
+        $(document).Toasts('create', {
+          class: 'bg-warning',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultDanger').click(function() {
+        $(document).Toasts('create', {
+          class: 'bg-danger',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultMaroon').click(function() {
+        $(document).Toasts('create', {
+          class: 'bg-maroon',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+    });
+
+  </script>
 @endsection

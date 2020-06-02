@@ -24,3 +24,6 @@ Route::post('/edit-user','HomeController@EditUser')->name('edit-user');
 Route::put('/edit-avatar','HomeController@EditAvatar')->name('edit-avatar');
 Route::post('/create-letter','HomeController@CreateLetter')->name('create-letter');
 Route::get('/real-time/{id?}','HomeController@RealTimeData')->name('real-time');
+Route::get('/admin-function','HomeController@Admin')->name('admin-function');
+Route::post('/aprrove','HomeController@Approve')->name('approve');
+Route::post('/dissaprrove','HomeController@Dissapprove')->name('dissapprove');

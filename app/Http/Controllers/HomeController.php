@@ -101,4 +101,57 @@ class HomeController extends Controller
         }
         return response()->json($array_letter);
     }
+    public function Admin(){
+        $letter = Absence_letter::get();
+        $letter_form = array();
+        foreach($letter as $item){
+            $user = User::where('id',$item->user_id)->first();
+            $object = (object)[
+                        'id'                =>      $item->id,
+                        'user_name'         =>      $user->name,
+                        'reason'            =>      $item->reason,
+                        'from_date'         =>      $item->from_date,
+                        'to_date'           =>      $item->to_date,
+                        'status'            =>      $item->status,
+                        'reason_disapprove' =>      $item->reason_disapprove,
+                        'created_at'        =>      $item->created_at,
+                        'updated_at'        =>      $item->updated_at
+                    ];
+            array_push($letter_form,$object);
+        }
+        return view('layouts.admin-function',compact('letter_form'));
+    }
+    public function Approve(Request $req){
+        if($req->id_letter){
+            $letter = Absence_letter::where('id',$req->id_letter)->first();
+            $user = User::where('id',$letter->user_id)->first();
+            if($user->total_holidays>0){
+                $user->total_holidays -= 1;
+                $user->save();
+                $letter->status = 'approved';
+                $letter->save();
+                echo("Aproved success");
+            }else{
+                $letter->status = 'dissapproved';
+                $letter->save();
+                echo("Fail because employee doesn't have holiday any  more");
+            }
+        }
+        else{
+            echo "fails";
+        }
+    }
+    public function Dissapprove(Request $req){
+        if($req->id_letter){
+            $letter = Absence_letter::where('id',$req->id_letter)->first();
+            $letter->status = 'reject';
+            $letter->reason_disapprove = $req->reason;
+            $letter->save();
+            echo("reject success");
+
+        }
+        else{
+            echo "fails";
+        }
+    }
 }

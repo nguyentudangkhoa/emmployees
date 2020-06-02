@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
@@ -165,9 +169,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <a href="{{route('profile')}}" class="nav-link">
+                  <a href="{{route('admin-function')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Letter</p>
+                  <p>Admin</p>
                 </a>
               </li>
             </ul>
