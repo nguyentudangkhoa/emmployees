@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Absence_letter;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,8 @@ class HomeController extends Controller
         return view('layouts.home');
     }
     public function ShowProfile(){
-        return view('layouts.profile');
+        $letter_form = Absence_letter::where('user_id',Auth::user()->id)->get();
+        return view('layouts.profile',compact('letter_form'));
     }
     public function EditUser(Request $req){
         if($req->id_member){
@@ -44,6 +46,7 @@ class HomeController extends Controller
             $user->granduate_year = $req->granduate_year;
             $user->start_job_at = $req->start_job_at;
             $user->birthday = $req->birthday;
+            $user->gender = $req->gender;
             $user->note = $req->note;
             $user->save();
             echo "Edit profile ".$user->name." success";
@@ -56,6 +59,46 @@ class HomeController extends Controller
             User::where('id',Auth::user()->id)->update(['avatar'=>$image->getClientOriginalName('myFile')]);
             return redirect()->back()->with('Update-Avatar','Update Avartar successfull');
         }
-        
+
+    }
+    public function CreateLetter(Request $req){
+        if($req->id_member){
+            $today = date("Y-m-d");
+            $today_time = strtotime($today);
+            $expire_time = strtotime($req->from_date);
+            $to_time = strtotime($req->to_date);
+            if($today_time<$expire_time){
+                if($expire_time<$to_time){
+                    $letter = new Absence_letter();
+                    $letter->user_id = $req->id_member;
+                    $letter->from_date = $req->from_date;
+                    $letter->to_date = $req->to_date;
+                    $letter->reason = $req->reason;
+                    $letter->save();
+                    echo('Send letter success');
+                }else{
+                    echo('To date bigger than from date');
+                }
+            }else{
+                echo("Please creating your letter more than one day from now");
+            }
+        }
+    }
+    public function RealTimeData(Request $req){
+        $letter = Absence_letter::where('user_id',$req->id)->get();
+        $array_letter = array();
+        foreach($letter as $item){
+            $realtime = Absence_letter::where('created_at',$item->created_at)->first();
+            $object =  array(
+                            (string)date("Y-m-d",strtotime($item->created_at))=> (object)[
+                                                        'Title'=>'leave of absence',
+                                                        'reason'=>$realtime->reason,
+                                                        'approve'=>$realtime->status,
+                                                        'reason-disapprove'=> $realtime->reason_disapprove
+                                                ]
+                        );
+            array_push($array_letter,$object);
+        }
+        return response()->json($array_letter);
     }
 }

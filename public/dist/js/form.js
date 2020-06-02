@@ -33,7 +33,52 @@ $(document).ready(function(){
                         granduate_year:formData.get('granduate_year'),
                         start_job_at:start_job_at,
                         birthday:formData.get('birthday'),
+                        gender:formData.get('gender'),
                         note:formData.get('note'),
+                        _token:_token
+                    },
+                success:function(data){
+                    alert(data);
+                    $('#master-name').text(formData.get('name'));
+                    $('#txtUser-name').text(formData.get('name'));
+                    $('#txtGender').text(formData.get('gender'));
+                    $('#txtAddress').text(formData.get('address'));
+                    $('#txtUniversity').text(formData.get('university'));
+                    $('#txtGranduate-year').text(formData.get('granduate_year'));
+                    $('#txtId-card').text(formData.get('identity_card'));
+                    $('#txtIssue-date').text(formData.get('issue_date'));
+                    $('#txtIssue-place').text(formData.get('issue_place'));
+                    $('#txtBirthday').text(formData.get('birthday'));
+                    $('#txtNote').text(formData.get('note'));
+
+                }
+        });
+    });
+    $('#toggle-btn').click(function(){
+        $('.form-avatar').toggle('slow');
+        var $this = $(this);
+        $this.toggleClass('toggel-btn-ready');
+        if($this.hasClass('toggel-btn-ready')){
+            $this.text('Change Avatar');
+        } else {
+            $this.text('Cancel');
+        }
+    });
+    $('#exampleInputFile').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('#label-img').text(fileName);
+    });
+    $('#setting-letter').submit(function(e){
+        e.preventDefault();
+        var formData= new FormData(this);
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+                url:"create-letter",
+                method:"POST",
+                data:{  id_member:formData.get('id_member'),
+                        from_date:formData.get('from_date'),
+                        to_date:formData.get('to_date'),
+                        reason:formData.get('reason'),
                         _token:_token
                     },
                 success:function(data){
@@ -41,5 +86,4 @@ $(document).ready(function(){
                 }
         });
     });
-
 });

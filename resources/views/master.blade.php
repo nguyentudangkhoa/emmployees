@@ -27,9 +27,17 @@
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
 
+  <!-- InputMask -->
+  <script src="plugins/moment/moment.min.js"></script>
+  <script src="plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -102,7 +110,7 @@
             @endif
         </div>
         <div class="info">
-        <a href="{{route('profile')}}" class="d-block">{{Auth::user()->name}}</a>
+        <a href="{{route('profile')}}" id="master-name" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -130,7 +138,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+                <i class="fas fa-address-card"></i>
               <p>
                 Employees
                 <i class="fas fa-angle-left right"></i>
@@ -145,6 +153,27 @@
               </li>
             </ul>
           </li>
+
+          @if (Auth::user()->role == "admin")
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link">
+              <i class="fas fa-user-shield"></i>
+              <p>
+                Admin
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="{{route('profile')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Letter</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endif
+
 
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
@@ -205,8 +234,10 @@
 <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
+<!-- InputMask -->
 <script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<!-- date-range-picker -->
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
@@ -227,6 +258,7 @@
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <!-- AdminLTE App -->
+
 
 </body>
 </html>

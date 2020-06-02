@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function absence_letter(){
+        return $this->hasMany('App\Absence_Letter', 'user_id', 'id');
+    }
+    public function overtime(){
+        return $this->hasMany('App\Overtime', 'user_id', 'id');
+    }
 }
