@@ -27,3 +27,5 @@ Route::get('/real-time/{id?}','HomeController@RealTimeData')->name('real-time');
 Route::get('/admin-function','HomeController@Admin')->name('admin-function');
 Route::post('/aprrove','HomeController@Approve')->name('approve');
 Route::post('/dissaprrove','HomeController@Dissapprove')->name('dissapprove');
+Route::get('/get-data','HomeController@GetData')->name('get-data');
+Route::get('/calender','HomeController@Calender')->name('calender');

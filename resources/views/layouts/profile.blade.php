@@ -49,7 +49,7 @@
                           <b>Address</b> <a class="float-right" id="txtAddress">{{Auth::user()->address}}</a>
                         </li>
                         <li class="list-group-item">
-                          <b>Total day off </b> <a class="float-right" id="txtHoliday">{{Auth::user()->total_holidays}}</a>
+                          <b>Total holiday </b> <a class="float-right" id="txtHoliday">{{Auth::user()->total_holidays}}</a>
                         </li>
                         <li class="list-group-item">
                           <b>Gender </b> <a class="float-right" id="txtGender">{{Auth::user()->gender}}</a>
@@ -179,15 +179,16 @@
                                       </div>
 
                             <div class="card-body table-responsive p-0" style="height: 100%;">
+                            <input type="hidden" name="" value="{{$i=0}}">
                                 <table id="example3" class="table table-hover text-nowrap">
                                   <thead>
                                     <tr>
-                                      <th>ID</th>
+                                      <th>No</th>
                                       <th>Reason</th>
                                       <th>From date</th>
                                       <th>To date</th>
                                       <th>Status</th>
-                                      <th>Reason dissapprove</th>
+                                      <th>Reject reason</th>
                                       <th>Created at</th>
                                       <th>Updated at</th>
                                     </tr>
@@ -195,7 +196,7 @@
                                   <tbody>
                                   @foreach ($letter_form as $user_item)
                                     <tr>
-                                      <td>{{$user_item->id}}</td>
+                                      <td>{{++$i}}</td>
                                       <td>{{$user_item->reason}}</td>
                                       <td>{{$user_item->from_date}}</td>
                                       <td>{{$user_item->to_date}}</td>

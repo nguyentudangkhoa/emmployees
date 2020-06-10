@@ -144,4 +144,21 @@ $(document).ready(function(){
             }
         });
     });
+    var array = [];
+    $.ajax({
+        url: 'get-data',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response){
+            var data = JSON.parse(response);
+            var x;
+            for (i = 0; i < data.length; i += 1)
+            {
+                array[i] = data[i];
+            }
+        }
+    });
+    $('#show_data').click(()=>{
+        console.log(array);
+    });
 });

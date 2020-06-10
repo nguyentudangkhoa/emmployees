@@ -141,6 +141,18 @@ class HomeController extends Controller
             echo "fails";
         }
     }
+    public function GetData(){
+        $letter = Absence_letter::where('user_id',Auth::user()->id)->get();
+        $array = array();
+        foreach($letter as $item){
+            $object = (object)[
+                'from_date'   =>      $item->from_date,
+                'to_date'     =>      $item->to_date
+            ];
+            array_push($array,$object);
+        }
+        return response()->json($array);
+    }
     public function Dissapprove(Request $req){
         if($req->id_letter){
             $letter = Absence_letter::where('id',$req->id_letter)->first();
@@ -149,9 +161,21 @@ class HomeController extends Controller
             $letter->save();
             echo("reject success");
 
-        }
-        else{
+        }else{
             echo "fails";
         }
+    }
+    public function Calender(){
+        $date = Absence_letter::where('id',Auth::user()->id)->where('status','approved')->get();
+        $calendars = array();
+        foreach($date as $item){
+            $object = (object)[
+                'reason'            =>              $item->reason,
+                'from_date'         =>              $item->from_date,
+                'to_date'           =>              date('Y-m-d', strtotime( $item->to_date. ' + 1 days'))
+            ];
+            array_push($calendars,$object);
+        }
+        return view('layouts.calender',compact('calendars'));
     }
 }

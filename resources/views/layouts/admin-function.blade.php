@@ -21,141 +21,10 @@
           <section class="content">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-md-3">
-
-                  <!-- Profile Image -->
-                  <div class="card card-primary card-outline">
-                    <div class="card-body box-profile">
-                      <div class="text-center">
-                          @if (Auth::user()->avatar != '')
-                          <img class="profile-user-img img-fluid img-circle"
-                             src="dist/img/{{Auth::user()->avatar}}"
-                             alt="User profile picture">
-                          @else
-                          <img class="profile-user-img img-fluid img-circle" src="dist/img/user4-128x128.jpg" alt="User profile picture">
-                          @endif
-
-                      </div>
-
-                      <h3 class="profile-username text-center" id="txtUser-name">{{Auth::user()->name}}</h3>
-
-                      <p class="text-muted text-center">{{Auth::user()->position}}</p>
-
-                      <ul class="list-group list-group-unbordered mb-3">
-                        <li class="list-group-item">
-                          <b>ID</b> <a class="float-right" id="txtId">{{Auth::user()->id}}</a>
-                        </li>
-                        <li class="list-group-item">
-                          <b>Address</b> <a class="float-right" id="txtAddress">{{Auth::user()->address}}</a>
-                        </li>
-                        <li class="list-group-item">
-                          <b>Total day off </b> <a class="float-right" id="txtHoliday">{{Auth::user()->total_holidays}}</a>
-                        </li>
-                        <li class="list-group-item">
-                          <b>Gender </b> <a class="float-right" id="txtGender">{{Auth::user()->gender}}</a>
-                        </li>
-                      </ul>
-                      @if(Session::has('Update-Avatar'))
-                            <script>Change avatar success</script>
-                      @endif
-                      <button id="toggle-btn" class="toggel-btn-ready  btn btn-primary btn-block"><b>Change Avatar</b></button>
-                      <form action="{{route('edit-avatar')}}" method="POST" class="form-avatar" enctype="multipart/form-data" style="display: none; margin-top 10px">
-                          @method('PUT')
-                          @csrf
-
-                          <div class="input-group">
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" name="image" id="exampleInputFile" required>
-                              <label class="custom-file-label" id='label-img' for="exampleInputFile">Choose File</label>
-                            </div>
-                        </div>
-                          <input type="submit" class="btn btn-primary btn-block" value="Submit">
-                      </form>
-                    </div>
-                    <!-- /.card-body -->
-                  </div>
-                  <!-- /.card -->
-
-                  <!-- About Me Box -->
-                  <div class="card card-primary">
-                    <div class="card-header">
-                      <h3 class="card-title">About Me</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                      <strong><i class="fas fa-book mr-1"></i> University</strong>
-
-                      <p class="text-muted" id="txtUniversity">
-                        {{Auth::user()->university}}
-                      </p>
-
-                      <hr>
-
-                      <strong><i class="fas fa-book mr-1"></i> Granduate year</strong>
-
-                      <p class="text-muted" id="txtGranduate-year">
-                        {{Auth::user()->granduate_year}}
-                      </p>
-
-                      <hr>
-
-                      <strong><i class="fas fa-envelope"></i> Email</strong>
-
-                      <p class="text-muted" id="txtEmail">{{Auth::user()->email}}</p>
-
-                      <hr>
-
-                      <strong><i class="fas fa-pencil-alt mr-1" ></i> Identity card</strong>
-
-                      <p class="text-muted" id="txtId-card">
-                        {{Auth::user()->identity_card}}
-                      </p>
-
-                      <hr>
-
-                      <strong><i class="fas fa-pencil-alt mr-1"></i> Issue date</strong>
-
-                      <p class="text-muted" id="txtIssue-date">
-                        {{Auth::user()->issue_date}}
-                      </p>
-
-                      <hr>
-
-                      <strong><i class="fas fa-pencil-alt mr-1"></i> Issue place</strong>
-
-                      <p class="text-muted" id="txtIssue-place">
-                        {{Auth::user()->issue_place}}
-                      </p>
-
-                      <hr>
-
-                      <strong><i class="fas fa-pencil-alt mr-1"></i> Birthday</strong>
-
-                      <p class="text-muted" id="txtBirthday">
-                        {{Auth::user()->birthday}}
-                      </p>
-
-                      <hr>
-
-                      <strong><i class="fas fa-pencil-alt mr-1"></i> Role</strong>
-
-                      <p class="text-muted" id="txtRole">
-                        {{Auth::user()->role}}
-                      </p>
-
-                      <hr>
 
 
-                      <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                      <p class="text-muted" id="txtNote"> {{Auth::user()->note}} </p>
-                    </div>
-                    <!-- /.card-body -->
-                  </div>
-                  <!-- /.card -->
-                </div>
                 <!-- /.col -->
-                <div class="col-md-9">
+                <div class="col-md-12">
                   <div class="card">
                     <div class="card-header p-2">
                       <ul class="nav nav-pills">
@@ -188,7 +57,7 @@
                                       <th>From date</th>
                                       <th>To date</th>
                                       <th>Status</th>
-                                      <th>Reason dissapprove</th>
+                                      <th>Reason reject</th>
                                       <th>Created at</th>
                                       <th>Updated at</th>
                                       <th>Action</th>
