@@ -39,6 +39,10 @@ trait RegistersUsers
             return $response;
         }
 
+        $user = User::where('email',$request->email)->first();
+        $user->login_at = date("Y-m-d H:i:s");
+        $user->save();
+
         return $request->wantsJson()
                     ? new Response('', 201)
                     : redirect($this->redirectPath());

@@ -149,6 +149,14 @@
                       <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
 
                       <p class="text-muted" id="txtNote"> {{Auth::user()->note}} </p>
+
+
+                      <hr>
+
+
+                      <strong><i class="far fa-file-alt mr-1"></i> Salary</strong>
+
+                      <p class="text-muted" id="txtNote"> {{number_format(Auth::user()->salary)}} VND</p>
                     </div>
                     <!-- /.card-body -->
                   </div>

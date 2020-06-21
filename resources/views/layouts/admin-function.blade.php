@@ -29,7 +29,7 @@
                     <div class="card-header p-2">
                       <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Approve absence Letter</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Salary</a></li>
                         <li class="nav-item"><a class="nav-link" href="#letter" data-toggle="tab">Create Absence Letter</a></li>
                       </ul>
                     </div><!-- /.card-header -->
@@ -158,97 +158,87 @@
 
 
                         <div class="tab-pane" id="settings">
-                          <form class="form-horizontal" id="form_settings" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="id_member" id="id_member" value="{{Auth::user()->id}}">
-                            <div class="form-group row">
-                              <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" id="inputName" value="{{Auth::user()->name}}" placeholder="Name" required>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="email" id="inputEmail" value="{{Auth::user()->email}}" placeholder="Email" required>
-                                </div>
-                              </div>
-                            <div class="form-group row">
-                              <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" name="address" id="inputAddress"value="{{Auth::user()->address}}" placeholder="Address" required>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputIDCard" class="col-sm-2 col-form-label">Identity card</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="identity_card" id="inputIDCard" value="{{Auth::user()->identity_card}}" placeholder="Identity card" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputIssuePlace" class="col-sm-2 col-form-label">Issue place</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="issue_place" id="inputIssuePlace" value="{{Auth::user()->issue_place}}" placeholder="Issue place" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputIssueDate" class="col-sm-2 col-form-label">Issue date</label>
-                                <div class="col-sm-10">
-                                  <input type="date" class="form-control" name="issue_date" id="inputIssueDate" value="{{Auth::user()->issue_date}}" placeholder="Issue date" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputUniersity" class="col-sm-2 col-form-label">University</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="university" id="inputUniversity" value="{{Auth::user()->university}}" placeholder="University" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputGrandudateYear" class="col-sm-2 col-form-label">Granduate year</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="granduate_year" id="inputGrandudateYear">
-                                        @for ($i = 1910; $i < 2099; $i++)
-                                            <option>{{$i}}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputStartJobAt" class="col-sm-2 col-form-label">Start job at</label>
-                                <div class="col-sm-10">
-                                  <input type="datetime-local" class="form-control" name="start_job_at" id="inputStartJobAt" placeholder="Start job at" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputBirthday" class="col-sm-2 col-form-label">Birthday</label>
-                                <div class="col-sm-10">
-                                  <input type="date" class="form-control" name="birthday" id="inputBirthday" placeholder="Birthday" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputGender" class="col-sm-2 col-form-label">Gender</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="gender" id="inputGender">
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Another</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="inputNote" class="col-sm-2 col-form-label">Note</label>
-                              <div class="col-sm-10">
-                                <textarea class="form-control" name="note" id="inputNote" placeholder="Note" required> {{Auth::user()->note}}</textarea>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <div class="offset-sm-2 col-sm-10">
-                                <button type="submit" id="submit_setting" class="btn btn-danger">Submit</button>
-                              </div>
-                            </div>
-                          </form>
+                            <div class="card-body table-responsive p-0" style="height: 100%;">
+                                <input type="hidden" name="" value="{{$i=0}}">
+                                    <table id="example2" class="table table-hover text-nowrap">
+                                      <thead>
+                                        <tr>
+                                          <th>No</th>
+                                          <th>Name</th>
+                                          <th>Email</th>
+                                          <th>Position</th>
+                                          <th>Salary</th>
+                                          <th>Option</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                      @foreach ($salary as $sala)
+                                        <tr>
+                                          <td>{{++$i}}</td>
+                                          <td>{{$sala->name}}</td>
+                                          <td>{{$sala->email}}</td>
+                                          <td>{{$sala->position}}</td>
+                                          <td><p id="p{{ $sala->id }}">{{number_format($sala->salary)}} VND</p></td>
+                                          <td>
+                                            <div class="btn-group">
+                                                <button type="button" data-id="{{ $sala->id }}" data-name="{{ $sala->name }}" class="btn-option-salary btn btn-success" data-toggle="modal" data-target="#modal-option">
+                                                    Add new salary
+                                                </button>
+                                                <form action="{{ route('print-PDF', $sala->id) }}" method="get">
+                                                    <button type="submit" class="btn btn-danger"><i class="fas fa-print"></i> Print PDF</button>
+                                                </form>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      @endforeach
+                                      </tbody>
+                                    </table>
+                                  </div>
                         </div>
                         <!-- /.tab-pane -->
+                         <!-- /.modal -->
+
+      <div class="modal fade" id="modal-option">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Salary Oprion</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="form_add_salary" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="user_id" id="user_id">
+                    <div class="form-group row">
+                        <label for="user-name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="name" id="user_name" value="" placeholder="Name" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user-salary" class="col-sm-2 col-form-label">Salary</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="salary" id="user-salary" value="" placeholder="Salary">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" id="btn-add-salary" class="btn btn-danger">Add new salary</button>
+                        </div>
+                      </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
                         <!--Letter absence-->
                         <div class="tab-pane" id="letter">
                             <form class="form-horizontal"  id="setting-letter"  method="post" enctype="multipart/form-data">

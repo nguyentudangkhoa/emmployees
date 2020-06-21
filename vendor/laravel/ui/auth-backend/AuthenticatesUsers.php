@@ -111,6 +111,10 @@ trait AuthenticatesUsers
             return $response;
         }
 
+        $user = User::where('email',$request->email)->first();
+        $user->login_at = date("Y-m-d H:i:s");
+        $user->save();
+
         return $request->wantsJson()
                     ? new Response('', 204)
                     : redirect()->intended($this->redirectPath());
@@ -161,6 +165,10 @@ trait AuthenticatesUsers
      */
     public function logout(Request $request)
     {
+        $user_logout = User::where('email',Auth::user()->email)->first();
+        $user_logout->logout_at = date("Y-m-d H:i:s");
+        $user_logout->save();
+
         $this->guard()->logout();
 
         $request->session()->invalidate();

@@ -144,21 +144,34 @@ $(document).ready(function(){
             }
         });
     });
-    var array = [];
-    $.ajax({
-        url: 'get-data',
-        method: 'GET',
-        dataType: 'json',
-        success: function(response){
-            var data = JSON.parse(response);
-            var x;
-            for (i = 0; i < data.length; i += 1)
-            {
-                array[i] = data[i];
+
+    $('.btn-option-salary').click(function(){
+        $('#user_name').attr('value',$(this).data('name'));
+        $('#user_id').attr('value',$(this).data('id'));
+    });
+    function formatNumber (num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    }
+    $('#form_add_salary').submit(function(e){
+        e.preventDefault();
+        var formData = new FormData(this);
+        var _token = $('input[name="_token"]').val();
+        console.log(formData.get('user_id'));
+
+        $.ajax({
+            url: "addSalary",
+            method:"PUT",
+            data:{
+                id:formData.get('user_id'),
+                name:formData.get('name'),
+                salary:formData.get('salary'),
+                _token:_token
+            },
+            success:function(data){
+                alert(data);
+                $('#p'+formData.get('user_id')).text(formatNumber($('#user-salary').val())+' VND');
             }
-        }
+        });
     });
-    $('#show_data').click(()=>{
-        console.log(array);
-    });
+
 });

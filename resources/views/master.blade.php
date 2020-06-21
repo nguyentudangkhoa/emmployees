@@ -145,22 +145,13 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="" class="nav-link">
+          <li class="nav-item">
+            <a href="{{route('profile')}}" class="nav-link">
                 <i class="fas fa-address-card"></i>
               <p>
-                Employees
-                <i class="fas fa-angle-left right"></i>
+                Profile
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="{{route('profile')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Profile</p>
-                </a>
-              </li>
-            </ul>
           </li>
 
           @if (Auth::user()->role == "admin")
@@ -176,10 +167,18 @@
               <li class="nav-item">
                   <a href="{{route('admin-function')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Admin</p>
+                  <p>Employees</p>
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('simple')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Table</p>
+                  </a>
+                </li>
+              </ul>
           </li>
           @endif
           <li class="nav-item">
