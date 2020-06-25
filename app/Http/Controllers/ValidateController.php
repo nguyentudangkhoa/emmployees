@@ -58,4 +58,28 @@ class ValidateController extends Controller
             }
         }
     }
+    public function EmName(Request $req){
+        if($req->name){
+            $query = $req->name;
+            $data = User::where('name', 'LIKE', "%{$query}%")
+                    ->get();
+            if($data){
+                $output = '<ul id="selectName" class="dropdown-menu ajax-list" style="display:block; position:absolute ">';
+                foreach($data as $row)
+                {
+                    $output .= '
+                    <li class="item">'.$row->name.'</li><br>
+                    ';
+                }
+                $output .= '</ul>';
+                echo $output;
+            }else{
+                echo "Do not find any employees";
+            }
+
+        }
+        else{
+            echo "Do not find any employees";
+        }
+    }
 }

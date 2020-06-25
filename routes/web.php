@@ -69,4 +69,4 @@ Route::delete('delete-user/{user_id?}','HomeController@DestroyUser')->name('dele
 Route::get('/add-location','HomeController@LocationAdd')->name('add-location');
 
 Route::post('/add-location-now','HomeController@AddLocation')->name('add-location-now');
-
+Route::post('/EmName','ValidateController@EmName')->name('EmName');

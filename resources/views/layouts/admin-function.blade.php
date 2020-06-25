@@ -30,7 +30,7 @@
                       <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Approve absence Letter</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Salary</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#letter" data-toggle="tab">Create Absence Letter</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#overtime" data-toggle="tab">Overtime</a></li>
                       </ul>
                     </div><!-- /.card-header -->
                     <div class="card-body">
@@ -240,26 +240,45 @@
       </div>
       <!-- /.modal -->
                         <!--Letter absence-->
-                        <div class="tab-pane" id="letter">
-                            <form class="form-horizontal"  id="setting-letter"  method="post" enctype="multipart/form-data">
+                        <div class="tab-pane" id="overtime">
+                            <form class="form-horizontal"  id="form-overtime"  method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id_member" id="id" value="{{Auth::user()->id}}">
                               <div class="form-group row">
-                                <label for="inputFrom" class="col-sm-2 col-form-label">From</label>
+                                <label for="inputDateOverTime" class="col-sm-2 col-form-label">Date Overtime</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" name="from_date" id="inputFrom" placeholder="From" required>
+                                    <input type="date" class="form-control" name="date_overtime" id="inputDateOverTime" placeholder="From" >
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="inputTo" class="col-sm-2 col-form-label">To</label>
+                                <label for="inputNameEm" class="col-sm-2 col-form-label">Employee's name</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" name="to_date" id="inputTo" placeholder="To" required>
+                                  <select id="inputNameEm" class="form-control custom-select">
+                                    <option selected="" disabled="">Select one</option>
+                                    @foreach ($user_name as $name)
+                                        <option data-id="{{ $name->id }}">{{ $name->id }}-{{ $name->name }}</option>
+                                    @endforeach
+
+                                  </select>
+
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="inputReason" class="col-sm-2 col-form-label">Reason</label>
+                                <label for="inputFromHour" class="col-sm-2 col-form-label">From</label>
                                 <div class="col-sm-10">
-                                  <textarea class="form-control" name="reason" id="inputReason" placeholder="Reason"></textarea>
+                                    <input type="time" class="form-control" name="from_hour" id="inputFromHour" placeholder="From" >
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputToHour" class="col-sm-2 col-form-label">To</label>
+                                <div class="col-sm-10">
+                                    <input type="time" class="form-control" name="to_hour" id="inputToHour" placeholder="To" >
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputTaskName" class="col-sm-2 col-form-label">Task name</label>
+                                <div class="col-sm-10">
+                                  <textarea class="form-control" name="task_name" id="inputTaskName" placeholder="Task name" ></textarea>
                                 </div>
                               </div>
                               <div class="form-group row">

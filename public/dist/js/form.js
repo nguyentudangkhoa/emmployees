@@ -173,5 +173,11 @@ $(document).ready(function(){
             }
         });
     });
+    $('#form-overtime').submit(function(e){
+        e.preventDefault();
+        var formData= new FormData(this);
+        var nameEm = $('#inputNameEm').children('option:selected').data('id');
+        alert(formData.get('to_hour'));
+    });
 
 });

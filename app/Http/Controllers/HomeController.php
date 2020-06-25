@@ -116,6 +116,7 @@ class HomeController extends Controller
     //admin layout
     public function Admin(){
         $letter = Absence_letter::get();
+        $user_name  =  User::get();
         $letter_form = array();
         $salary = User::get();
         foreach($letter as $item){
@@ -133,7 +134,7 @@ class HomeController extends Controller
                     ];
             array_push($letter_form,$object);
         }
-        return view('layouts.admin-function',compact('letter_form','salary'));
+        return view('layouts.admin-function',compact('letter_form','salary','user_name'));
     }
     //Approve the letter
     public function Approve(Request $req){

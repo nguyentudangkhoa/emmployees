@@ -240,6 +240,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>role</th>
                     <th>Create at</th>
                     <th>Update at</th>
                     <th>Log In at</th>
@@ -253,6 +254,7 @@
                     <td>{{$user_item->id}}</td>
                     <td>{{$user_item->name}}</td>
                     <td>{{$user_item->email}}</td>
+                    <td>{{ $user_item->role }}</td>
                     <td>{{$user_item->created_at}}</td>
                     <td>{{$user_item->updated_at}}</td>
                     <td>{{$user_item->login_at}}</td>
