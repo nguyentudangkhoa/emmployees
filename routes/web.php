@@ -70,3 +70,5 @@ Route::get('/add-location','HomeController@LocationAdd')->name('add-location');
 
 Route::post('/add-location-now','HomeController@AddLocation')->name('add-location-now');
 Route::post('/EmName','ValidateController@EmName')->name('EmName');
+//set overtime for employees
+Route::post('/AddOverTime','HomeController@AddOverTime')->name('AddOverTime');

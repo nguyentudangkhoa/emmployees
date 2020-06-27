@@ -247,13 +247,13 @@
                               <div class="form-group row">
                                 <label for="inputDateOverTime" class="col-sm-2 col-form-label">Date Overtime</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" name="date_overtime" id="inputDateOverTime" placeholder="From" >
+                                    <input type="date" class="form-control" name="date_overtime" id="inputDateOverTime" placeholder="From" required>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="inputNameEm" class="col-sm-2 col-form-label">Employee's name</label>
                                 <div class="col-sm-10">
-                                  <select id="inputNameEm" class="form-control custom-select">
+                                  <select id="inputNameEm" name="mem_id" class="form-control custom-select" required>
                                     <option selected="" disabled="">Select one</option>
                                     @foreach ($user_name as $name)
                                         <option data-id="{{ $name->id }}">{{ $name->id }}-{{ $name->name }}</option>
@@ -264,21 +264,38 @@
                                 </div>
                               </div>
                               <div class="form-group row">
+                                <label for="inputPlaceOT" class="col-sm-2 col-form-label">Place OT</label>
+                                <div class="col-sm-10">
+                                  <select id="inputPlaceOT" name="place_ot" class="form-control custom-select" required>
+                                    <option selected="" disabled="">Select one</option>
+                                    <option >Back end</option>
+                                    <option >Front end</option>
+                                    <option >Tester QC/QA</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group row">
                                 <label for="inputFromHour" class="col-sm-2 col-form-label">From</label>
                                 <div class="col-sm-10">
-                                    <input type="time" class="form-control" name="from_hour" id="inputFromHour" placeholder="From" >
+                                    <input type="time" class="form-control" name="from_hour" id="inputFromHour" placeholder="From" required>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="inputToHour" class="col-sm-2 col-form-label">To</label>
                                 <div class="col-sm-10">
-                                    <input type="time" class="form-control" name="to_hour" id="inputToHour" placeholder="To" >
+                                    <input type="time" class="form-control" name="to_hour" id="inputToHour" placeholder="To" required>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="inputTaskName" class="col-sm-2 col-form-label">Task name</label>
                                 <div class="col-sm-10">
-                                  <textarea class="form-control" name="task_name" id="inputTaskName" placeholder="Task name" ></textarea>
+                                  <textarea class="form-control" name="task_name" id="inputTaskName" placeholder="Task name" required></textarea>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputNoteOT" class="col-sm-2 col-form-label">Note</label>
+                                <div class="col-sm-10">
+                                  <textarea class="form-control" name="note_ot" id="inputNoteOT" placeholder="Note" required></textarea>
                                 </div>
                               </div>
                               <div class="form-group row">

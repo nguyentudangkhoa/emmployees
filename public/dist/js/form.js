@@ -177,7 +177,25 @@ $(document).ready(function(){
         e.preventDefault();
         var formData= new FormData(this);
         var nameEm = $('#inputNameEm').children('option:selected').data('id');
-        alert(formData.get('to_hour'));
+        var _token = $('input[name="_token"]').val();
+        // ajax function
+        $.ajax({
+            url: "AddOverTime",
+            method:"POST",
+            data:{
+                mem_id:nameEm,
+                date_ot:formData.get('date_overtime'),
+                from_time:formData.get('from_hour'),
+                to_time:formData.get('to_hour'),
+                place_ot:formData.get('place_ot'),
+                task_name:formData.get('task_name'),
+                note_ot:formData.get('note_ot'),
+                _token:_token
+            },
+            success:function(data){
+                alert(data);
+            }
+        });
     });
 
 });

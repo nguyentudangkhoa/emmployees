@@ -1,6 +1,5 @@
 @extends('master')
 @section('content')
-<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -87,7 +86,6 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
   <!-- /.content-wrapper -->
   <script>
     $(function () {
@@ -148,7 +146,6 @@
           };
         }
       });
-
       var calendar = new Calendar(calendarEl, {
         plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
         header    : {
@@ -160,16 +157,31 @@
         //Random default events
         events    : [
         @foreach($calendars as $calendar)
-          {
+        {
             title          : 'Absence: {{$calendar->reason}}',
             start          : '{{$calendar->from_date}}',
             end            : '{{$calendar->to_date}}',
             backgroundColor: '#f56954', //red
             borderColor    : '#f56954', //red
             allDay         : true
-          },
+        },
         @endforeach
-
+        @foreach($ot as $ot_item)
+        {
+            title          : 'to {{ $ot_item->end_time }} ',
+            start          : '{{ $ot_item->date_ot }}',
+            allDay         : true,
+            backgroundColor: '#0073b7', //Blue
+            borderColor    : '#0073b7' //Blue
+        },
+        {
+            title          : 'Overtime:{{ $ot_item->start_time }}',
+            start          : '{{ $ot_item->date_ot }}',
+            allDay         : true,
+            backgroundColor: '#0073b7', //Blue
+            borderColor    : '#0073b7' //Blue
+        },
+        @endforeach
         ],
         editable  : true,
         droppable : true, // this allows things to be dropped onto the calendar !!!

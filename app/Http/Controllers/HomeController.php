@@ -6,6 +6,7 @@ use App\Absence_letter;
 use App\User;
 use App\Location;
 use App\House;
+use App\Overtime;
 use DateTime;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
@@ -35,7 +36,10 @@ class HomeController extends Controller
     //index
     public function index()
     {
-        return view('layouts.home');
+        $house_product = House::get();
+        $Location = Location::get();
+        $User = User::get();
+        return view('layouts.home',compact('house_product','Location','User'));
     }
     //profile
     public function ShowProfile(){
@@ -175,6 +179,7 @@ class HomeController extends Controller
     //Calendar
     public function Calender(){
         $date = Absence_letter::where('user_id',Auth::user()->id)->where('status','approved')->get();
+        $ot = Overtime::where('user_id',Auth::user()->id)->get();
         $calendars = array();
         foreach($date as $item){
             $object = (object)[
@@ -184,7 +189,7 @@ class HomeController extends Controller
             ];
             array_push($calendars,$object);
         }
-        return view('layouts.calender',compact('calendars'));
+        return view('layouts.calender',compact('calendars','ot'));
     }
     //add salary using jquery ajax
     public function AddSalary(Request $req){
@@ -413,5 +418,19 @@ class HomeController extends Controller
             return redirect()->back()->with('Fail-Add-Location','Fails to add location because location have exist');
         }
 
+    }
+    //ajax add overtime for employees
+    public function AddOverTime(Request $req){
+        if($req->mem_id){
+            $user = User::find($req->mem_id);
+            Overtime::create(['user_id'=>$req->mem_id,
+                            'date_ot'=>$req->date_ot,
+                            'start_time'=>$req->from_time,
+                            'end_time'=>$req->to_time,
+                            'place_ot'=>$req->place_ot,
+                            'task_name'=>$req->task_name,
+                            'note'=>$req->note_ot]);
+            echo "Set overtime for ".$user->name."  Success";
+        }
     }
 }
