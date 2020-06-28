@@ -72,3 +72,5 @@ Route::post('/add-location-now','HomeController@AddLocation')->name('add-locatio
 Route::post('/EmName','ValidateController@EmName')->name('EmName');
 //set overtime for employees
 Route::post('/AddOverTime','HomeController@AddOverTime')->name('AddOverTime');
+//update over time status
+Route::put('/UpdateStatusOT','HomeController@UpdateStatusOT')->name('UpdateStatusOT');

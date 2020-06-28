@@ -453,4 +453,11 @@ class HomeController extends Controller
             echo "Set overtime for ".$user->name."  Success";
         }
     }
+    //ajax update status overtime
+    public function UpdateStatusOT(Request $req){
+        if($req->id_ot){
+            Overtime::where('id',$req->id_ot)->update(['note'=>$req->note_em,'status'=>$req->stas_em]);
+            echo 'Update status success';
+        }
+    }
 }

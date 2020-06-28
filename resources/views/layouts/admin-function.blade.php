@@ -185,8 +185,8 @@
                     <td>{{$ot->end_time}}</td>
                     <td>{{$ot->place_ot}}</td>
                     <td>{{$ot->task_name}}</td>
-                    <td>{{$ot->note}}</td>
-                    <td>{{ $ot->status }}</td>
+                    <td><p id="note{{ $ot->id }}">{{$ot->note}}</p></td>
+                    <td><p id="status{{ $ot->id }}">{{ $ot->status }}</p></td>
                     <td>{{ $ot->created_at }}</td>
                     <td>{{ $ot->updated_at }}</td>
                   <td>
@@ -230,17 +230,19 @@
                       <option>Success</option>
                   </select>
                 </div>
+                <p id="sta_vef" style="color:red;font-weight:bold; display: none"></p>
             </div>
             <div class="form-group row">
                 <label for="em_note" class="col-sm-2 col-form-label">Note</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" name="em_note" id="em_note" placeholder="Note" required></textarea>
+                  <textarea class="form-control" name="em_note" id="em_note" placeholder="Note" ></textarea>
                 </div>
+                <p id="note_vef" style="color:red;font-weight:bold ;display: none"></p>
             </div>
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" id="confirm_ot" class="btn btn-primary" data-urf="{{route('approve')}}" data-token="{{ csrf_token() }}">Save changes</button>
+          <button type="button" id="confirm_ot" class="btn btn-primary"  data-token="{{ csrf_token() }}">Save changes</button>
         </div>
       </div>
       <!-- /.modal-content -->

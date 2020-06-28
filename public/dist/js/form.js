@@ -206,6 +206,35 @@ $(document).ready(function(){
         $('#em_note').val(note);
     });
     $('#confirm_ot').click(function(){
-        alert($('#em_status').val());
+        var id_ot = $('#ot_id').val();
+        var name_em = $('#em_name').val();
+        var note_em = $('#em_note').val();
+        var stas_em = $('#em_status').val();
+
+        if(stas_em == null){
+            $('#sta_vef').css('display','block');
+            $('#sta_vef').text('Please select a status');
+        }else if(note_em == ""){
+            $('#note_vef').css('display','block');
+            $('#note_vef').text("Note can't empty");
+        }else{
+            $.ajax({
+                url: 'UpdateStatusOT',
+                method:"PUT",
+                data:{
+                    id_ot:id_ot,
+                    note_em:note_em,
+                    stas_em:stas_em,
+                    _token:$(this).data('token')
+                },
+                success:function(data){
+                    alert(data);
+                    $('#note'+id_ot).text(note_em);
+                    $('#status'+id_ot).text(stas_em);
+                    $('.btn-ot').data('note',note_em);
+                }
+            });
+        }
+
     });
 });
