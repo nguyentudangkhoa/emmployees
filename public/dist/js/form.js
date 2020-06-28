@@ -197,5 +197,15 @@ $(document).ready(function(){
             }
         });
     });
-
+    $('.btn-ot').click(function(){
+        var id = $(this).data('id');
+        var name = $(this).data('name');
+        var note = $(this).data('note');
+        $('#ot_id').val(id);
+        $('#em_name').val(name);
+        $('#em_note').val(note);
+    });
+    $('#confirm_ot').click(function(){
+        alert($('#em_status').val());
+    });
 });

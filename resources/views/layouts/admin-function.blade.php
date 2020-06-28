@@ -29,8 +29,9 @@
                     <div class="card-header p-2">
                       <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Approve absence Letter</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#overtime_em" data-toggle="tab">Employees overtime</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Salary</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#overtime" data-toggle="tab">Overtime</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#overtime" data-toggle="tab">Set overtime</a></li>
                       </ul>
                     </div><!-- /.card-header -->
                     <div class="card-body">
@@ -154,7 +155,99 @@
   </div>
   <!-- /.modal -->
   <!---->
+  <div class="tab-pane" id="overtime_em">
+    <div class="card-body table-responsive p-0" style="height: 100%;">
+        <input type="hidden" name="" value="{{$i=0}}">
+            <table id="example1" class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee's name</th>
+                    <th>Date</th>
+                    <th>Start at</th>
+                    <th>End</th>
+                    <th>Place</th>
+                    <th>Task name</th>
+                    <th>Note</th>
+                    <th>Status</th>
+                    <th>Created at</th>
+                    <th>Update at</th>
+                    <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach ($overTime as $ot)
+                <tr>
+                    <td>{{$ot->id}}</td>
+                    <td>{{$ot->user_name}}</td>
+                    <td>{{$ot->date_ot}}</td>
+                    <td>{{$ot->start_time}}</td>
+                    <td>{{$ot->end_time}}</td>
+                    <td>{{$ot->place_ot}}</td>
+                    <td>{{$ot->task_name}}</td>
+                    <td>{{$ot->note}}</td>
+                    <td>{{ $ot->status }}</td>
+                    <td>{{ $ot->created_at }}</td>
+                    <td>{{ $ot->updated_at }}</td>
+                  <td>
+                    <div class="btn-group">
+                        <button type="button" data-id="{{ $ot->id }}" data-note="{{ $ot->note }}" data-name="{{ $ot->user_name }}" class="btn-ot btn btn-success" data-toggle="modal" data-target="#modal-setOT">
+                            Update status
+                        </button>
+                    </div>
+                  </td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+</div>
+<!-- /.modal -->
 
+<div class="modal fade" id="modal-setOT">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirm Approve</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="ot_id" name="ot_id">
+            <div class="form-group row">
+                <label for="em_name" class="col-sm-2 col-form-label">Employee's Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="em_name" id="em_name" value="" placeholder="Name" disabled>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="em_status" class="col-sm-2 col-form-label">Status</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="em_status" id="em_status">
+                      <option selected="" disabled="">Select One</option>
+                      <option>Fails</option>
+                      <option>Success</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="em_note" class="col-sm-2 col-form-label">Note</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" name="em_note" id="em_note" placeholder="Note" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" id="confirm_ot" class="btn btn-primary" data-urf="{{route('approve')}}" data-token="{{ csrf_token() }}">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
 
                         <div class="tab-pane" id="settings">

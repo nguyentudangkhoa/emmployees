@@ -168,6 +168,7 @@
                     <div class="card-header p-2">
                       <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Letter</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#overtime" data-toggle="tab">Overtime</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                         <li class="nav-item"><a class="nav-link" href="#letter" data-toggle="tab">Create Absence Letter</a></li>
                       </ul>
@@ -226,6 +227,67 @@
                   </div>
                   <!-- /.card -->
                 </div>
+
+
+                <div class="tab-pane" id="overtime">
+                    <!-- The timeline -->
+                    <div class="">
+                      <!-- timeline time label -->
+                      <div class="row">
+                          <div class="col-12" style="text-align:center">
+                            <div class="card">
+                              <div class="card-header">
+                                  <h3 class="card-title">Over Time</h3>
+                                </div>
+
+                      <div class="card-body table-responsive p-0">
+                      <input type="hidden" name="" value="{{$i=0}}">
+                          <table id="example2" class="table table-hover text-nowrap">
+                            <thead>
+                              <tr>
+                                <th>No</th>
+                                <th>Date</th>
+                                <th>Start at</th>
+                                <th>End</th>
+                                <th>Place</th>
+                                <th>Task name</th>
+                                <th>Note</th>
+                                <th>Status</th>
+                                <th>Created at</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($overTime as $overTime_item)
+                              <tr>
+                                <td>{{++$i}}</td>
+                                <td>{{$overTime_item->date_ot}}</td>
+                                <td>{{$overTime_item->start_time}}</td>
+                                <td>{{$overTime_item->end_time}}</td>
+                                <td>{{$overTime_item->place_ot}}</td>
+                                <td>{{$overTime_item->task_name}}</td>
+                                <td>{{$overTime_item->note}}</td>
+                                @if ($overTime_item->status == "")
+                                <td>Not done yet</td>
+                                @elseif ($overTime_item->status == "Fail")
+                                <td>fail</td>
+                                @elseif ($overTime_item->status == "Success")
+                                <td>Success</td>
+                                @endif
+                                <td>{{$overTime_item->created_at}}</td>
+                              </tr>
+                            @endforeach
+                            </tbody>
+                          </table>
+                        </div>
+
+                      <!-- END timeline item -->
+                    </div>
+                  </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
                         <!-- /.tab-pane -->
 
                         <div class="tab-pane" id="settings">

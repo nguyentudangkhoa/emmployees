@@ -44,7 +44,8 @@ class HomeController extends Controller
     //profile
     public function ShowProfile(){
         $letter_form = Absence_letter::where('user_id',Auth::user()->id)->get();
-        return view('layouts.profile',compact('letter_form'));
+        $overTime = Overtime::where('user_id',Auth::user()->id)->get();
+        return view('layouts.profile',compact('letter_form','overTime'));
     }
     //edit profile
     public function EditUser(Request $req){
@@ -123,6 +124,8 @@ class HomeController extends Controller
         $user_name  =  User::get();
         $letter_form = array();
         $salary = User::get();
+        $overTime =array();
+        $overTimeEm = Overtime::get();
         foreach($letter as $item){
             $user = User::where('id',$item->user_id)->first();
             $object = (object)[
@@ -138,7 +141,24 @@ class HomeController extends Controller
                     ];
             array_push($letter_form,$object);
         }
-        return view('layouts.admin-function',compact('letter_form','salary','user_name'));
+        foreach($overTimeEm as $ot_item){
+            $user_ot = User::where('id',$ot_item->user_id)->first();
+            $object_ot = (object)[
+                        'id'                =>      $ot_item->id,
+                        'user_name'         =>      $user_ot->name,
+                        'date_ot'           =>      $ot_item->date_ot,
+                        'start_time'        =>      $ot_item->start_time,
+                        'end_time'          =>      $ot_item->end_time,
+                        'place_ot'          =>      $ot_item->place_ot,
+                        'task_name'         =>      $ot_item->task_name,
+                        'note'              =>      $ot_item->note,
+                        'status'            =>      $ot_item->status,
+                        'created_at'        =>      $ot_item->created_at,
+                        'updated_at'        =>      $ot_item->updated_at
+                    ];
+            array_push($overTime,$object_ot);
+        }
+        return view('layouts.admin-function',compact('letter_form','salary','user_name','overTime'));
     }
     //Approve the letter
     public function Approve(Request $req){
