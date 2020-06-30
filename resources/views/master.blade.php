@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>@yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -182,10 +182,10 @@
           </li>
           @endif
           <li class="nav-item">
-            <a href="{{route('calender')}}" class="nav-link">
+            <a href="{{route('calendar')}}" class="nav-link">
                 <i class="fas fa-calendar-alt"></i>
               <p>
-                Calender
+                Calendar
               </p>
             </a>
 

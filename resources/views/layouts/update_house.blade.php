@@ -1,4 +1,5 @@
 @extends('master')
+@section('title','Update house')
 @section('content')
 <div class="card card-primary">
     <div class="card-header">

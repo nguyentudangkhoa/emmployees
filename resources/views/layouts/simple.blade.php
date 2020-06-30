@@ -1,4 +1,5 @@
 @extends('master')
+@section('title','Admin-Table')
 @section('content')
 <section class="content-header">
     <div class="container-fluid">

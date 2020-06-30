@@ -232,9 +232,15 @@ $(document).ready(function(){
                     $('#note'+id_ot).text(note_em);
                     $('#status'+id_ot).text(stas_em);
                     $('.btn-ot').data('note',note_em);
+                    $('#note_vef').css('display','none');
+                    $('#note_vef').text("");
                 }
             });
         }
 
+    });
+    $('#close-ot').click(function(){
+        $('#note_vef').css('display','none');
+        $('#note_vef').text("");
     });
 });

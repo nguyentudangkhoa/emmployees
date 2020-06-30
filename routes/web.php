@@ -39,7 +39,7 @@ Route::post('/dissaprrove','HomeController@Dissapprove')->name('dissapprove');
 //get data
 Route::get('/get-data','HomeController@GetData')->name('get-data');
 //Calender of user
-Route::get('/calender','HomeController@Calender')->name('calender');
+Route::get('/calendar','HomeController@Calender')->name('calendar');
 //Edit employees's salary
 Route::put('/addSalary','HomeController@AddSalary')->name('addSalary');
 //Print employees's salary

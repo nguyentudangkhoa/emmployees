@@ -1,4 +1,5 @@
 @extends('master')
+@section('title','Admin')
 @section('content')
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -241,7 +242,7 @@
             </div>
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" id="close-ot" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" id="confirm_ot" class="btn btn-primary"  data-token="{{ csrf_token() }}">Save changes</button>
         </div>
       </div>
