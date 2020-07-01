@@ -232,6 +232,8 @@ $(document).ready(function(){
                     $('#note'+id_ot).text(note_em);
                     $('#status'+id_ot).text(stas_em);
                     $('.btn-ot').data('note',note_em);
+                    $('#sta_vef').css('display','none');
+                    $('#sta_vef').text('');
                     $('#note_vef').css('display','none');
                     $('#note_vef').text("");
                 }
@@ -239,7 +241,9 @@ $(document).ready(function(){
         }
 
     });
-    $('#close-ot').click(function(){
+    $('#close_ot').click(function(){
+        $('#sta_vef').css('display','none');
+        $('#sta_vef').text('');
         $('#note_vef').css('display','none');
         $('#note_vef').text("");
     });

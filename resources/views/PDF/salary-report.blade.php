@@ -61,6 +61,11 @@
                     @else
                         <div class="position"><strong>Absence: </strong>{{ $dayof }} Day</div>
                     @endif
+                    @if(round($time,0) >= 1)
+                    <div class="position"><strong>Over time: </strong>{{ round($time,0) }} hour</div>
+                    @else
+                    <div class="position"><strong>Over time: </strong>{{ round($time,0) }} hours</div>
+                    @endif
 
                     <div class="position"><strong>Salary: </strong>{{ number_format($user->salary) }}VND</div>
                     <div class="position"><strong>Still have </strong>{{ $user->total_holidays }} days off in this year</div>

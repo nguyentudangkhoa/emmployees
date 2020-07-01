@@ -228,6 +228,11 @@ class HomeController extends Controller
         $dayLess = 0;
         $dayWork = 0;
         $absence = Absence_letter::where('user_id', $user->id)->get();
+        $overTime = Overtime::where('user_id', $user->id)->get();
+        $time = 0;
+        foreach($overTime as $time_ot){
+            $time += (strtotime($time_ot->end_time) - strtotime($time_ot->start_time))/60/60;
+        }
         foreach($absence as $item){
             $date = new DateTime($item->from_date);
             $date->modify('last day of this month');
@@ -243,7 +248,7 @@ class HomeController extends Controller
                 $dayWork = ((strtotime($$lastDay."+ 1 days") - strtotime($firstDay)) / 60 / 60 / 24)-$dayof;//total work
             }
         }
-        $pdf = PDF::loadView('PDF.salary-report', compact('user','dayof','dayWork'));
+        $pdf = PDF::loadView('PDF.salary-report', compact('user','dayof','dayWork','time'));
         return $pdf->download('Salary-'.$user->name.'.pdf');
     }
 
