@@ -247,4 +247,45 @@ $(document).ready(function(){
         $('#note_vef').css('display','none');
         $('#note_vef').text("");
     });
+    $('.btnDis').click(function(){
+        $('#idlocal').val($(this).data('idloca'));
+        console.log($(this).data('idloca'));
+    });
+    $('#dislocation').click(function(){
+        var id_location = $('#idlocal').val();
+        if(id_location != ""){
+            $.ajax({
+                url: 'disable-location',
+                method:"PUT",
+                data:{
+                    id_location:id_location,
+                    _token:$(this).data('token')
+                },
+                success:function(data){
+                    alert(data);
+                    $('#local'+id_location).children().hide();
+                }
+            });
+        }
+    });
+    $('.del-house-form').click(function(){
+        $('#id_house').val($(this).data('idhouse'));
+    });
+    $('#del-house').click(function(){
+        var id_house = $('#id_house').val();
+        if(id_house != ""){
+            $.ajax({
+                url: 'disable-house',
+                method:"PUT",
+                data:{
+                    id_house:id_house,
+                    _token:$(this).data('token')
+                },
+                success:function(data){
+                    alert(data);
+                    $('#house'+id_house).children().hide();
+                }
+            });
+        }
+    });
 });

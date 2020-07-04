@@ -40,7 +40,9 @@
             <label>Location</label>
             <select class="form-control" name="location_name" id="location_name">
                 @foreach ($location as $locate)
+                @if ($locate->disable != 1)
                 <option name="{{$locate->id}}" id="{{$locate->id}}">{{$locate->location_name}}</option>
+                @endif
                 @endforeach
             </select>
         </div>

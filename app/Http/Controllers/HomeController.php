@@ -304,14 +304,14 @@ class HomeController extends Controller
 
         }
         if($req->has('NameOfLocation')){
-            $Location = Location::orderBy('location_name',$req->NameOfLocation)->paginate(4)->appends('NameOfLocation',$req->NameOfLocation);
+            $Location = Location::orderBy('location_name',$req->NameOfLocation)->paginate(10)->appends('NameOfLocation',$req->NameOfLocation);
 
         }
         else if($req->has('IdOfLocation')){
-            $Location = Location::orderBy('id',$req->IdOfLocation)->paginate(4)->appends('IdOfLocation',$req->IdOfLocation);
+            $Location = Location::orderBy('id',$req->IdOfLocation)->paginate(10)->appends('IdOfLocation',$req->IdOfLocation);
 
         }else{
-            $Location = Location::paginate(4);
+            $Location = Location::paginate(10);
 
         }
         if($req->has('NameOfUser')){
@@ -340,6 +340,7 @@ class HomeController extends Controller
                 "house_address" =>  $product->house_address,
                 "house_image"   =>  $product->house_image,
                 "location_name" =>  $loName->location_name,
+                'disable'       =>  $product->disable,
                 "create_at"     =>  $product->created_at,
                 "update_at"     =>  $product->updated_at
             ];
@@ -463,6 +464,19 @@ class HomeController extends Controller
         if($req->id_ot){
             Overtime::where('id',$req->id_ot)->update(['note'=>$req->note_em,'status'=>$req->stas_em]);
             echo 'Update status success';
+        }
+    }
+    //ajax disable location
+    public function DisableLocation(Request $req){
+        if($req->id_location){
+            Location::where('id',$req->id_location)->update(['disable'=>1]);
+            echo "Disable success";
+        }
+    }
+    public function DisableHouse(Request $req){
+        if($req->id_house){
+            House::where('id',$req->id_house)->update(['disable'=>1]);
+            echo "Disable success";
         }
     }
 }

@@ -74,3 +74,7 @@ Route::post('/EmName','ValidateController@EmName')->name('EmName');
 Route::post('/AddOverTime','HomeController@AddOverTime')->name('AddOverTime');
 //update over time status
 Route::put('/UpdateStatusOT','HomeController@UpdateStatusOT')->name('UpdateStatusOT');
+//ajax disable location
+Route::put('/disable-location','HomeController@DisableLocation')->name('disable-location');
+//ajax disable house
+Route::put('/disable-house','HomeController@DisableHouse')->name('disable-house');

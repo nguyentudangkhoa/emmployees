@@ -77,7 +77,8 @@
                 </thead>
                 <tbody>
                 @foreach ($array as $value)
-                  <tr>
+                @if($value->disable != 1)
+                  <tr id="house{{$value->id}}">
                     <td>{{$value->id}}</td>
                     <td>{{$value->house_name}}</td>
                     <td>{{$value->house_type}}</td>
@@ -89,11 +90,7 @@
                     <td>{{$value->update_at}}</td>
                     <td>
                         <div class="btn-group">
-                            <form class="has-confirm" data-message="Do you want to delete this location?" action="{{route('delete',$value->id)}}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <input type="submit" class="btn btn-danger" value="Delete">
-                            </form>
+                            <input type="submit" class="del-house-form btn btn-danger" data-idhouse="{{$value->id}}" value="Delete" data-toggle="modal" data-target="#modal-house">
                             <form action="{{route('House-edit',$value->id)}}" method="get">
                                 <input type="submit" class="btn btn-info" value="Update">
                             </form>
@@ -101,6 +98,7 @@
 
                     </td>
                   </tr>
+                  @endif
                   @endforeach
                 </tbody>
               </table>
@@ -111,6 +109,29 @@
           </div>
           <!-- /.card -->
         </div>
+      </div>
+
+      <div class="modal fade" id="modal-house">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Confirm Approve</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="id_house" value="">
+              <p>Are you sure to disable this house&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id="del-house" class="btn btn-primary" data-token="{{ csrf_token() }}">Confirm</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
       </div>
       <!-- /.row -->
       <div class="row">
@@ -158,7 +179,8 @@
                 </thead>
                 <tbody>
                 @foreach ($Location as $lo_item)
-                  <tr>
+                @if($lo_item->disable != 1)
+                  <tr id="local{{ $lo_item->id }}">
                     <td>{{$lo_item->id}}</td>
                     <td>{{$lo_item->location_name}}</td>
                     @if ($lo_item->parent_id == 2)
@@ -167,13 +189,9 @@
                         <td>Chưa có bảng parent</td>
                     @endif
                     <td>
-
+                        {{-- action="{{route('delete-Location',$lo_item->id)}}" --}}
                         <div class="btn-group">
-                            <form class="has-confirm" data-message="Do you want to delete this location?" action="{{route('delete-Location',$lo_item->id)}}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            <button type="submit" class="btnDis btn btn-danger" data-idloca="{{ $lo_item->id }}" data-toggle="modal" data-target="#modal-sm">Delete</button>
                             <form action="{{route('update-location',$lo_item->id)}}" method="get">
                                 <button type="submit" class="btn btn-info">update</button>
                             </form>
@@ -181,6 +199,7 @@
 
                     </td>
                    </tr>
+                   @endif
                 @endforeach
                 </tbody>
               </table>
@@ -191,6 +210,29 @@
           <!-- /.card -->
         </div>
       </div>
+      <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Confirm Approve</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="idlocal" value="">
+              <p>Are you sure to disable this location&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id="dislocation" class="btn btn-primary" data-idlocal="" data-urf="" data-token="{{ csrf_token() }}">Confirm</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
       <!-- /.row -->
       <div class="row">
         <div class="col-12">
@@ -302,7 +344,7 @@
         "ordering": true,
         "info": true,
         "autoWidth": true,
-        "responsive": true,
+        "responsive": false,
         "paginate":false,
       });
       $("#example3").DataTable({
@@ -311,7 +353,7 @@
         "ordering": true,
         "info": true,
         "autoWidth": true,
-        "responsive": true,
+        "responsive": false,
         "paginate":false,
       });
       $('#example2').DataTable({
@@ -320,7 +362,7 @@
         "ordering": true,
         "info": true,
         "autoWidth": true,
-        "responsive": true,
+        "responsive": false,
         "paginate":false,
       });
     });
