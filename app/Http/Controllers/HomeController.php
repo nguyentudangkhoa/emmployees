@@ -479,4 +479,24 @@ class HomeController extends Controller
             echo "Disable success";
         }
     }
+
+    //update user layout
+    public function UserUpdate(Request $req){
+        $user = User::find($req->user_id);
+        return view('layouts.update-user',compact('user'));
+    }
+    //update user
+    public function UpdateUser(Request $req){
+        $this->validate($req,[
+            'name'=>'required',
+            'email'=>'required'
+        ]);
+        $user = User::where('email',$req->email)->first();
+        if(!$user){
+            User::where('id',$req->user_id)->update(['name'=>$req->name,'email'=>$req->email]);
+            return redirect()->back()->with('Update-User','Update user successfull');
+        }else{
+            return redirect()->back()->with('Fail-Update-User','User email is exist');
+        }
+    }
 }

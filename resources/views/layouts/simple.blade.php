@@ -304,12 +304,12 @@
                     <td>{{$user_item->logout_at}}</td>
                     <td>
                         <div class="btn-group">
-                            <form class="has-confirm" data-message="Do you want to delete this location?" action="{{route('delete-user',$user_item->id)}}" method="post">
+                            <form class="has-confirm" data-message="Do you want to delete this location?" action="" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
-                            <form action="" method="get">
+                            <form action="{{route('user-update',$user_item->id)}}" method="get">
                                 <button type="submit" class="btn btn-info">update</button>
                             </form>
                         </div>

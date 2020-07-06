@@ -78,3 +78,6 @@ Route::put('/UpdateStatusOT','HomeController@UpdateStatusOT')->name('UpdateStatu
 Route::put('/disable-location','HomeController@DisableLocation')->name('disable-location');
 //ajax disable house
 Route::put('/disable-house','HomeController@DisableHouse')->name('disable-house');
+//user update layout
+Route::get('/update-user/{user_id?}','HomeController@UserUpdate')->name('user-update');
+Route::patch('/make-update-user/{user_id?}','HomeController@UpdateUser')->name('make-user-update');
