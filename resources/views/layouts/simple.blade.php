@@ -78,6 +78,7 @@
                 </thead>
                 <tbody>
                 @foreach ($array as $value)
+                @if($value->location_dis != 1)
                   <tr id="house{{$value->id}}">
                     <td>{{$value->id}}</td>
                     <td>{{$value->house_name}}</td>
@@ -109,6 +110,7 @@
 
                     </td>
                   </tr>
+                  @endif
                   @endforeach
                 </tbody>
               </table>
