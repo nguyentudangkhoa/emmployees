@@ -253,7 +253,10 @@ $(document).ready(function(){
     });
     $('#dislocation').click(function(){
         var id_location = $('#idlocal').val();
-        if(id_location != ""){
+        var $message = $(this).data('message');
+        if(!confirm($message)){
+            e.preventDefault();
+        }else if(id_location != ""){
             $.ajax({
                 url: 'disable-location',
                 method:"PUT",
@@ -263,7 +266,9 @@ $(document).ready(function(){
                 },
                 success:function(data){
                     alert(data);
-                    $('#local'+id_location).children().hide();
+                    $('#status-location'+id_location).text('Disable');
+                    $('#dis-location'+id_location).css('display','none');
+                    $('#en-location'+id_location).css('display','block');
                 }
             });
         }
@@ -273,7 +278,10 @@ $(document).ready(function(){
     });
     $('#del-house').click(function(){
         var id_house = $('#id_house').val();
-        if(id_house != ""){
+        var $message = $(this).data('message');
+        if(!confirm($message)){
+            e.preventDefault();
+        }else if(id_house != ""){
             $.ajax({
                 url: 'disable-house',
                 method:"PUT",
@@ -283,7 +291,100 @@ $(document).ready(function(){
                 },
                 success:function(data){
                     alert(data);
-                    $('#house'+id_house).children().hide();
+                    $('#status-house'+id_house).text('Sold');
+                    $('#dis-house'+id_house).css('display','none');
+                    $('#en-house'+id_house).css('display','block');
+                }
+            });
+        }
+    });
+    $('.btn-dis-user').click(function(e){
+        var id_user = $(this).data('iduser');
+        var $message = $(this).data('message');
+        if(!confirm($message)){
+            e.preventDefault();
+        }else if(id_user != ""){
+            $.ajax({
+                url: 'disable-user',
+                method:"PUT",
+                data:{
+                    id_user:id_user,
+                    _token:$(this).data('token')
+                },
+                success:function(data){
+                    alert(data);
+                    $('#status-user'+id_user).text('Disable');
+                    $('#dis-user'+id_user).css('display','none');
+                    $('#en-user'+id_user).css('display','block');
+                }
+            });
+        }
+    })
+    //enable house
+    $('.en-house').click(function(e){
+        var id_house = $(this).data('idhouse');
+        var $message = $(this).data('message');
+        if(!confirm($message)){
+            e.preventDefault();
+        }else if(id_house != ""){
+            $.ajax({
+                url: 'enable-house',
+                method:"PUT",
+                data:{
+                    id_house:id_house,
+                    _token:$(this).data('token')
+                },
+                success:function(data){
+                    alert(data);
+                    $('#status-house'+id_house).text(' ');
+                    $('#dis-house'+id_house).css('display','block');
+                    $('#en-house'+id_house).css('display','none');
+                }
+            });
+        }
+    });
+    //enable location
+    $('.en-location').click(function(e){
+        var id_location = $(this).data('idloca');
+        var $message = $(this).data('message');
+        if(!confirm($message)){
+            e.preventDefault();
+        }else if(id_location != ""){
+            $.ajax({
+                url: 'enable-location',
+                method:"PUT",
+                data:{
+                    id_location:id_location,
+                    _token:$(this).data('token')
+                },
+                success:function(data){
+                    alert(data);
+                    $('#status-location'+id_location).text(' ');
+                    $('#dis-location'+id_location).css('display','block');
+                    $('#en-location'+id_location).css('display','none');
+                }
+            });
+        }
+    });
+    //enable user
+    $('.en-user').click(function(e){
+        var id_user = $(this).data('idloca');
+        var $message = $(this).data('message');
+        if(!confirm($message)){
+            e.preventDefault();
+        }else if(id_user != ""){
+            $.ajax({
+                url: 'enable-user',
+                method:"PUT",
+                data:{
+                    id_user:id_user,
+                    _token:$(this).data('token')
+                },
+                success:function(data){
+                    alert(data);
+                    $('#status-user'+id_user).text(' ');
+                    $('#dis-user'+id_user).css('display','block');
+                    $('#en-user'+id_user).css('display','none');
                 }
             });
         }

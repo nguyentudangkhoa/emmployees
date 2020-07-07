@@ -70,6 +70,7 @@
                     <th>Address</th>
                     <th>Location image</th>
                     <th>Location</th>
+                    <th>status</th>
                     <th>Create at</th>
                     <th>Update at</th>
                     <th>Action</th>
@@ -77,7 +78,6 @@
                 </thead>
                 <tbody>
                 @foreach ($array as $value)
-                @if($value->disable != 1)
                   <tr id="house{{$value->id}}">
                     <td>{{$value->id}}</td>
                     <td>{{$value->house_name}}</td>
@@ -86,11 +86,22 @@
                     <td>{{$value->house_address}}</td>
                     <td><img src="images/{{$value->house_image}}" style="width: 80px; height:50px" alt=""></td>
                     <td>{{$value->location_name}}</td>
+                    @if($value->disable == 1)
+                    <td><p id="status-house{{ $value->id }}">Sold</p></td>
+                    @else
+                    <td><p id="status-house{{ $value->id }}"></p></td>
+                    @endif
                     <td>{{$value->create_at}}</td>
                     <td>{{$value->update_at}}</td>
                     <td>
                         <div class="btn-group">
-                            <input type="submit" class="del-house-form btn btn-danger" data-idhouse="{{$value->id}}" value="Delete" data-toggle="modal" data-target="#modal-house">
+                            @if($value->disable != 1)
+                            <input type="submit" id="dis-house{{ $value->id }}" class="del-house-form btn btn-danger" data-idhouse="{{$value->id}}" value="Delete" data-toggle="modal" data-target="#modal-house">
+                            <input type="submit" id="en-house{{ $value->id }}" data-message="Do you wan to enable this house" class="en-house btn btn-success" data-idhouse="{{$value->id}}" data-token="{{ csrf_token() }}" value="Enable" style="display: none">
+                            @else
+                            <input type="submit" id="dis-house{{ $value->id }}" class="del-house-form btn btn-danger" data-idhouse="{{$value->id}}" value="Delete" data-toggle="modal" data-target="#modal-house" style="display: none">
+                            <input type="submit" id="en-house{{ $value->id }}" data-message="Do you wan to enable this house" class="en-house btn btn-success" data-idhouse="{{$value->id}}" data-token="{{ csrf_token() }}" value="Enable">
+                            @endif
                             <form action="{{route('House-edit',$value->id)}}" method="get">
                                 <input type="submit" class="btn btn-info" value="Update">
                             </form>
@@ -98,7 +109,6 @@
 
                     </td>
                   </tr>
-                  @endif
                   @endforeach
                 </tbody>
               </table>
@@ -126,7 +136,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" id="del-house" class="btn btn-primary" data-token="{{ csrf_token() }}">Confirm</button>
+              <button type="button" id="del-house" data-message="Do you want to disable this house ?" class="btn btn-primary" data-token="{{ csrf_token() }}">Confirm</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -174,12 +184,12 @@
                     <th>ID</th>
                     <th>Location</th>
                     <th>City</th>
+                    <th>status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                 @foreach ($Location as $lo_item)
-                @if($lo_item->disable != 1)
                   <tr id="local{{ $lo_item->id }}">
                     <td>{{$lo_item->id}}</td>
                     <td>{{$lo_item->location_name}}</td>
@@ -188,10 +198,21 @@
                     @else
                         <td>Chưa có bảng parent</td>
                     @endif
+                    @if($lo_item->disable != 1)
+                    <td><p id="status-location{{ $lo_item->id }}"></p></td>
+                    @else
+                    <td><p id="status-location{{ $lo_item->id }}">Disable</p></td>
+                    @endif
                     <td>
                         {{-- action="{{route('delete-Location',$lo_item->id)}}" --}}
                         <div class="btn-group">
-                            <button type="submit" class="btnDis btn btn-danger" data-idloca="{{ $lo_item->id }}" data-toggle="modal" data-target="#modal-sm">Delete</button>
+                            @if($lo_item->disable != 1)
+                            <button type="submit" id="dis-location{{$lo_item->id}}" class="btnDis btn btn-danger" data-idloca="{{ $lo_item->id }}" data-toggle="modal" data-target="#modal-sm">Delete</button>
+                            <input type="submit" id="en-location{{$lo_item->id}}" data-message="Do you wan to enable this location" class="en-location btn btn-success" data-idloca="{{ $lo_item->id}}" data-token="{{ csrf_token() }}" value="Enable" style="display: none">
+                            @else
+                            <input type="submit" id="en-location{{$lo_item->id}}" data-message="Do you wan to enable this location" class="en-location btn btn-success" data-idloca="{{ $lo_item->id}}" data-token="{{ csrf_token() }}" value="Enable" >
+                            <button type="submit" id="dis-location{{$lo_item->id}}" class="btnDis btn btn-danger" data-idloca="{{ $lo_item->id }}" data-toggle="modal" data-target="#modal-sm" style="display: none">Delete</button>
+                            @endif
                             <form action="{{route('update-location',$lo_item->id)}}" method="get">
                                 <button type="submit" class="btn btn-info">update</button>
                             </form>
@@ -199,7 +220,6 @@
 
                     </td>
                    </tr>
-                   @endif
                 @endforeach
                 </tbody>
               </table>
@@ -225,7 +245,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" id="dislocation" class="btn btn-primary" data-idlocal="" data-urf="" data-token="{{ csrf_token() }}">Confirm</button>
+              <button type="button" id="dislocation" class="btn btn-primary" data-message="Do you want to disable this location ?" data-idlocal="" data-urf="" data-token="{{ csrf_token() }}">Confirm</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -284,6 +304,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>role</th>
+                    <th>Status</th>
                     <th>Create at</th>
                     <th>Update at</th>
                     <th>Log In at</th>
@@ -298,17 +319,24 @@
                     <td>{{$user_item->name}}</td>
                     <td>{{$user_item->email}}</td>
                     <td>{{ $user_item->role }}</td>
+                    @if ($user_item->disable == 0)
+                        <td><p id="status-user{{ $user_item->id }}"></p></td>
+                    @else
+                        <td><p id="status-user{{ $user_item->id }}">Disable</p></td>
+                    @endif
                     <td>{{$user_item->created_at}}</td>
                     <td>{{$user_item->updated_at}}</td>
                     <td>{{$user_item->login_at}}</td>
                     <td>{{$user_item->logout_at}}</td>
                     <td>
                         <div class="btn-group">
-                            <form class="has-confirm" data-message="Do you want to delete this location?" action="" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            @if($user_item->disable == 0)
+                            <button type="submit" id="dis-user{{$user_item->id}}" data-message="Do you want to disable this account ?" class="btn-dis-user btn btn-danger" data-iduser="{{ $user_item->id }}" data-token="{{ csrf_token() }}">Delete</button>
+                            <input type="submit" id="en-user{{$user_item->id}}" data-message="Do you wan to enable this user?" class="en-user btn btn-success" data-idloca="{{$user_item->id}}" data-token="{{ csrf_token() }}" value="Enable" style="display: none">
+                            @else
+                            <button type="submit" id="dis-user{{$user_item->id}}" data-message="Do you want to disable this account ?" class="btn-dis-user btn btn-danger" data-iduser="{{ $user_item->id }}" data-token="{{ csrf_token() }}" style="display: none">Delete</button>
+                            <input type="submit" id="en-user{{$user_item->id}}" data-message="Do you wan to enable this user?" class="en-user btn btn-success" data-idloca="{{$user_item->id}}" data-token="{{ csrf_token() }}" value="Enable">
+                            @endif
                             <form action="{{route('user-update',$user_item->id)}}" method="get">
                                 <button type="submit" class="btn btn-info">update</button>
                             </form>
@@ -322,14 +350,6 @@
             </div>
             <!-- /.card-body -->
           </div>
-          <script type="text/javascript" >
-            $("form.has-confirm").submit(function (e) {
-                var $message = $(this).data('message');
-                if(!confirm($message)){
-                    e.preventDefault();
-                }
-            });
-        </script>
           <!-- /.card -->
         </div>
       </div>

@@ -394,6 +394,8 @@ class HomeController extends Controller
             "location_name"=>"required",
             "parent_id"=>"required"
         ]);
+        $status=0;
+
         if(!$location){
             Location::where('id',$req->id_location)->update(['location_name'=>$req->location_name,'parent_id'=>$req->parent_id]);
             return redirect()->back()->with('Update-Location','Update Location susscessfull');
@@ -473,10 +475,25 @@ class HomeController extends Controller
             echo "Disable success";
         }
     }
+    //ajax enable location
+    public function EnableLocation(Request $req){
+        if($req->id_location){
+            Location::where('id',$req->id_location)->update(['disable'=>0]);
+            echo "Enable success";
+        }
+    }
+    //ajax disable hosue
     public function DisableHouse(Request $req){
         if($req->id_house){
             House::where('id',$req->id_house)->update(['disable'=>1]);
             echo "Disable success";
+        }
+    }
+    //ajax enable hosue
+    public function EnableHouse(Request $req){
+        if($req->id_house){
+            House::where('id',$req->id_house)->update(['disable'=>0]);
+            echo "Enable success";
         }
     }
 
@@ -498,5 +515,23 @@ class HomeController extends Controller
         }else{
             return redirect()->back()->with('Fail-Update-User','User email is exist');
         }
+    }
+    //ajax disable user
+    public function DisableUser(Request $req){
+        if($req->id_user){
+            User::where('id', $req->id_user)->update(['disable'=>1]);
+            echo "Disable success";
+        }
+    }
+    //ajax enable user
+    public function EnableUser(Request $req){
+        if($req->id_user){
+            User::where('id', $req->id_user)->update(['disable'=>0]);
+            echo "Enable success";
+        }
+    }
+    //error login layout
+    public function ErrorLogin(){
+        return view("layouts.login-error");
     }
 }

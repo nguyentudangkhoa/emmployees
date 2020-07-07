@@ -76,8 +76,18 @@ Route::post('/AddOverTime','HomeController@AddOverTime')->name('AddOverTime');
 Route::put('/UpdateStatusOT','HomeController@UpdateStatusOT')->name('UpdateStatusOT');
 //ajax disable location
 Route::put('/disable-location','HomeController@DisableLocation')->name('disable-location');
+//ajax enable location
+Route::put('/enable-location','HomeController@EnableLocation')->name('enable-location');
 //ajax disable house
 Route::put('/disable-house','HomeController@DisableHouse')->name('disable-house');
+//ajax enable house
+Route::put('/enable-house','HomeController@EnableHouse')->name('enable-house');
 //user update layout
 Route::get('/update-user/{user_id?}','HomeController@UserUpdate')->name('user-update');
 Route::patch('/make-update-user/{user_id?}','HomeController@UpdateUser')->name('make-user-update');
+//disable user
+Route::put('/disable-user','HomeController@DisableUser')->name('disable-user');
+//enable user
+Route::put('/enable-user','HomeController@EnableUser')->name('enable-user');
+//error login
+Route::get("/error","HomeController@ErrorLogin")->name('error');

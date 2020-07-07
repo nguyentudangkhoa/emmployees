@@ -17,10 +17,10 @@
                 @endforeach
             </div>
             @endif
-        @if(Session::has('Update-User'))
+        @if(Session::has('Update-Location'))
                 <div class="alert alert-success">{{Session::get('Update-Location')}}</div>
         @endif
-        @if(Session::has('Fail-Update-User'))
+        @if(Session::has('Fail-Update-Location'))
                 <div class="alert alert-danger">{{Session::get('Fail-Update-Location')}}</div>
         @endif
         <input type="hidden" name="_token" value={{ csrf_token() }} >
@@ -33,8 +33,10 @@
         <div class="form-group">
           <label for="exampleInputPassword1">Parent ID</label>
           <input type="text" class="form-control" name="parent_id" value="{{$location->parent_id}}" id="parent_id" placeholder="Parent id">
+
         </div>
       </div>
+
       <!-- /.card-body -->
 
       <div class="card-footer">

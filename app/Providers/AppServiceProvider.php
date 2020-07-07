@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
     }
 }

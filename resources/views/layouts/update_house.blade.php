@@ -64,28 +64,6 @@
     </form>
 
 </div>
-<Script>
-    $(function(){
-        $('#form_submit').submit(function(e){
-            var house_id = $('#house_name').val();
-            var house_name = $('#house_name').val();
-            var house_type = $('#house_type').val();
-            var house_details =$('#house_details').val();
-            var house_address = $('#house_address').val()
-            var location_name = $('#location_name :selected').val();
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                type: "POST",
-                url: "{{route('Edit-House',"+house_id+")}}",
-                data: {house_id:house_id,house_name: house_name,house_type: house_type,house_details:house_details,house_address:house_address,location_name:location_name,_token:_token}
-                success: function(msg) {
-                    alert(msg);
-                }
-            });
-            e.preventDefault();
 
-        });
-    });
-</Script>
 @endsection
 
