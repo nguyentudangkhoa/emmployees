@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2020 at 05:06 PM
+-- Generation Time: Jul 07, 2020 at 12:04 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -75,7 +75,7 @@ CREATE TABLE `house` (
   `house_address` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `id_Location` int(11) DEFAULT NULL,
   `house_image` varchar(225) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `disable` int(11) DEFAULT NULL,
+  `disable` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -85,15 +85,15 @@ CREATE TABLE `house` (
 --
 
 INSERT INTO `house` (`id`, `house_name`, `house_type`, `house_details`, `house_address`, `id_Location`, `house_image`, `disable`, `created_at`, `updated_at`) VALUES
-(33, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 10, 'house2.jpg', 1, '2020-05-19 06:45:27', '2020-07-03 07:19:06'),
-(34, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 11, 'house2.jpg', NULL, '2020-05-20 02:03:07', '2020-05-20 02:03:07'),
-(39, 'Nhà ở 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Nhà ở', '30m2, 2 toilet', 'Tô Hiến Thành', 16, 'house2.jpg', NULL, '2020-05-20 03:17:47', '2020-05-20 03:17:47'),
-(40, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 12, 'house2.jpg', NULL, '2020-05-20 03:18:08', '2020-05-20 03:18:08'),
-(41, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 12, 'house.jpg', NULL, '2020-05-20 03:18:23', '2020-05-20 03:18:23'),
-(42, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 10, 'house.jpg', NULL, '2020-05-20 03:18:23', '2020-05-20 04:54:55'),
-(43, 'Nhà ở 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Nhà ở', '30m2, 2 toilet', 'Tô Hiến Thành', 10, 'house2.jpg', NULL, '2020-05-20 03:18:50', '2020-05-20 07:16:12'),
-(44, 'Nhà ở 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Nhà ở', '30m2, 2 toilet', 'Tô Hiến Thành', 18, 'house.jpg', NULL, '2020-05-20 03:19:09', '2020-05-20 03:19:09'),
-(45, 'Nhà trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Nhà trọ', '30m2, 2 toilet', '123 Trần Hưng Đạo', 10, 'photo-1512917774080-9991f1c4c750.jpg', NULL, '2020-06-24 11:10:50', '2020-06-24 11:11:45');
+(33, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 10, 'house2.jpg', 0, '2020-05-19 06:45:27', '2020-07-07 08:04:53'),
+(34, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 11, 'house2.jpg', 0, '2020-05-20 02:03:07', '2020-07-07 08:03:11'),
+(39, 'Nhà ở 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Nhà ở', '30m2, 2 toilet', 'Tô Hiến Thành', 16, 'house2.jpg', 0, '2020-05-20 03:17:47', '2020-07-07 08:03:30'),
+(40, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 12, 'house2.jpg', 0, '2020-05-20 03:18:08', '2020-07-07 08:03:59'),
+(41, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 12, 'house.jpg', 0, '2020-05-20 03:18:23', '2020-07-07 08:04:22'),
+(42, 'Phòng trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Phòng trọ', '30m2, 2 toilet', 'Tô Hiến Thành', 10, 'house.jpg', 0, '2020-05-20 03:18:23', '2020-05-20 04:54:55'),
+(43, 'Nhà ở 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Nhà ở', '30m2, 2 toilet', 'Tô Hiến Thành', 10, 'house2.jpg', 0, '2020-05-20 03:18:50', '2020-05-20 07:16:12'),
+(44, 'Nhà ở 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Nhà ở', '30m2, 2 toilet', 'Tô Hiến Thành', 18, 'house.jpg', 0, '2020-05-20 03:19:09', '2020-05-20 03:19:09'),
+(45, 'Nhà trọ 30m2, full tiện nghi, an ninh trung tâm Tô Hiến Thành', 'Nhà trọ', '30m2, 2 toilet', '123 Trần Hưng Đạo', 10, 'photo-1512917774080-9991f1c4c750.jpg', 0, '2020-06-24 11:10:50', '2020-06-24 11:11:45');
 
 -- --------------------------------------------------------
 
@@ -105,7 +105,7 @@ CREATE TABLE `location` (
   `id` int(11) NOT NULL,
   `location_name` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
-  `disable` int(10) DEFAULT NULL,
+  `disable` int(10) NOT NULL DEFAULT 0,
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -115,13 +115,13 @@ CREATE TABLE `location` (
 --
 
 INSERT INTO `location` (`id`, `location_name`, `parent_id`, `disable`, `updated_at`, `created_at`) VALUES
-(10, 'Phường 10, Quận 8', 2, 1, '2020-07-03 04:51:47', '2020-05-19 02:48:59'),
-(11, 'Phường 11, Quận 8', 2, 1, '2020-07-03 05:06:40', '2020-05-19 02:48:52'),
-(12, 'Phường 12, Quận 8', 2, 1, '2020-07-03 05:06:48', '2020-05-19 02:48:37'),
-(13, 'Phường 3, Quận 8', 2, NULL, '2020-05-19 02:46:17', '2020-05-19 02:46:17'),
-(15, 'Phường 3, Quận 9', 2, NULL, '2020-05-19 02:47:02', '2020-05-19 02:47:02'),
-(16, 'Phường 4, Quận 8', 2, NULL, '2020-05-19 04:05:28', '2020-05-19 04:05:28'),
-(18, 'Phường 4, Quận 9', 2, NULL, '2020-05-19 04:25:12', '2020-05-19 04:25:12');
+(10, 'Phường 10, Quận 8', 2, 0, '2020-07-07 08:15:14', '2020-05-19 02:48:59'),
+(11, 'Phường 11, Quận 8', 2, 0, '2020-07-03 05:06:40', '2020-05-19 02:48:52'),
+(12, 'Phường 12, Quận 8', 2, 0, '2020-07-03 05:06:48', '2020-05-19 02:48:37'),
+(13, 'Phường 3, Quận 8', 2, 0, '2020-07-07 06:56:45', '2020-05-19 02:46:17'),
+(15, 'Phường 3, Quận 9', 2, 0, '2020-07-07 07:36:47', '2020-05-19 02:47:02'),
+(16, 'Phường 4, Quận 8', 2, 0, '2020-07-07 08:10:44', '2020-05-19 04:05:28'),
+(18, 'Phường 4, Quận 9', 2, 0, '2020-05-19 04:25:12', '2020-05-19 04:25:12');
 
 -- --------------------------------------------------------
 
@@ -213,6 +213,7 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `login_at` datetime DEFAULT NULL,
   `logout_at` datetime DEFAULT NULL,
+  `disable` int(10) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -221,10 +222,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `address`, `identity_card`, `issue_place`, `issue_date`, `university`, `granduate_year`, `start_job_at`, `birthday`, `avatar`, `note`, `role`, `position`, `gender`, `total_holidays`, `email_verified_at`, `password`, `salary`, `remember_token`, `login_at`, `logout_at`, `created_at`, `updated_at`) VALUES
-(1, 'Nguyen Tu Dang Khoa', 'nguyentudangkhoa@gmail.com', 'Hồ Chí Minh', '261530344', 'Bình Thuận', '2017-07-28', 'Nguyễn Tất Thành', 1910, '2020-06-01 15:55:00', '1997-06-03', 'avatar.png', 'Nhân Viên', 'user', 'Software Engineer', 'Male', 6, NULL, '$2y$10$BSxGHqSOOUTIhsIX3LIjvOk1fPRhRSfwrp6FZu5PHbcXGnxiFadr6', 12000000, '3YbiHcojosboQDzUZPz6qIO2hKO1I8MBZA63I2W7vLjeFvzJhxzCh9EgMfrZ', '2020-06-28 16:46:10', '2020-06-28 16:51:36', '2020-05-28 01:39:28', '2020-07-01 07:34:09'),
-(2, 'Nguyen Tu Dang Khoa', 'khoakute1997@gmail.com', 'Hồ Chí Minh', '123123123123', 'Công An Tp. Hồ Chí Minh', '2018-02-14', 'Nguyễn Tất Thành', 2020, '2020-06-01 17:10:00', '1997-06-03', 'avatar.png', 'Nhân viên chính thức', 'user', 'QC-tester', 'Male', 14, NULL, '$2y$10$eXZDGfsvJEOHBrcQdSVWr.Qn/toanzN5TZP688y.DN1HTKRrKsxcO', 12000000, 'URmBn7xL4BWThfNW7mEf5S5zoSHARQA3SFwzfSmfJJmnMvbKyDBSUUvHkh2u', NULL, NULL, '2020-05-29 23:03:19', '2020-06-12 10:05:08'),
-(3, 'admin', 'admin@gmail.com', 'Hồ Chí Minh', '123123123123', 'Công An Tp. Hồ Chí Minh', '2020-06-02', 'Tôn Đức Thắng', 1910, '2020-06-12 08:55:00', '1994-06-12', 'avatar5.png', 'admin hệ thống', 'admin', NULL, 'Male', 14, NULL, '$2y$10$w.lF9tS4AzNbECrpD6UB9uC33t1FxPaXl7S3W9Swg07aSIl9hXOp6', NULL, '20XkwUcnXFlwZZfV74umwsRyN2lbORQwVsfK3RjdRKn9lUvGQYHnYXTPNAme', '2020-06-28 16:51:49', '2020-06-28 16:46:04', '2020-06-01 06:32:34', '2020-07-01 08:35:31');
+INSERT INTO `users` (`id`, `name`, `email`, `address`, `identity_card`, `issue_place`, `issue_date`, `university`, `granduate_year`, `start_job_at`, `birthday`, `avatar`, `note`, `role`, `position`, `gender`, `total_holidays`, `email_verified_at`, `password`, `salary`, `remember_token`, `login_at`, `logout_at`, `disable`, `created_at`, `updated_at`) VALUES
+(1, 'Nguyen Tu Dang Khoa', 'nguyentudangkhoa@gmail.com', 'Hồ Chí Minh', '261530344', 'Bình Thuận', '2017-07-28', 'Nguyễn Tất Thành', 1910, '2020-06-01 15:55:00', '1997-06-03', 'avatar.png', 'Nhân Viên', 'user', 'Software Engineer', 'Male', 6, NULL, '$2y$10$BSxGHqSOOUTIhsIX3LIjvOk1fPRhRSfwrp6FZu5PHbcXGnxiFadr6', 12000000, '3YbiHcojosboQDzUZPz6qIO2hKO1I8MBZA63I2W7vLjeFvzJhxzCh9EgMfrZ', '2020-07-07 16:40:09', '2020-06-28 16:51:36', 0, '2020-05-28 01:39:28', '2020-07-07 09:40:09'),
+(2, 'Nguyen Tu Dang Khoa', 'khoakute1997@gmail.com', 'Hồ Chí Minh', '123123123123', 'Công An Tp. Hồ Chí Minh', '2018-02-14', 'Nguyễn Tất Thành', 2020, '2020-06-01 17:10:00', '1997-06-03', 'avatar.png', 'Nhân viên chính thức', 'user', 'QC-tester', 'Male', 14, NULL, '$2y$10$eXZDGfsvJEOHBrcQdSVWr.Qn/toanzN5TZP688y.DN1HTKRrKsxcO', 12000000, 'NOoLQODEMIDmdtaD42nZ56ip2q0YvjsGXXm8KLliBsJvN2pBxFbbRudPLfdV', '2020-07-07 16:34:21', '2020-07-07 16:39:13', 1, '2020-05-29 23:03:19', '2020-07-07 09:39:13'),
+(3, 'admin', 'admin@gmail.com', 'Hồ Chí Minh', '123123123123', 'Công An Tp. Hồ Chí Minh', '2020-06-02', 'Tôn Đức Thắng', 1910, '2020-06-12 08:55:00', '1994-06-12', 'avatar5.png', 'admin hệ thống', 'admin', NULL, 'Male', 14, NULL, '$2y$10$w.lF9tS4AzNbECrpD6UB9uC33t1FxPaXl7S3W9Swg07aSIl9hXOp6', NULL, 'WaCtkJ4Zo0YLVdwTEKcPt5PLSC2GwkAeg62dSL8VjiPwAgDGQOtuU1VfNRtF', '2020-07-07 16:12:01', '2020-07-07 16:16:17', 0, '2020-06-01 06:32:34', '2020-07-07 09:16:17');
 
 --
 -- Indexes for dumped tables
