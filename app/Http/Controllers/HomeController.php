@@ -341,6 +341,7 @@ class HomeController extends Controller
                 "house_image"   =>  $product->house_image,
                 "location_name" =>  $loName->location_name,
                 "location_dis"  =>  $loName->disable,
+                "id_location"   =>  $loName->id,
                 'disable'       =>  $product->disable,
                 "create_at"     =>  $product->created_at,
                 "update_at"     =>  $product->updated_at

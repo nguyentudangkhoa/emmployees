@@ -269,6 +269,8 @@ $(document).ready(function(){
                     $('#status-location'+id_location).text('Disable');
                     $('#dis-location'+id_location).css('display','none');
                     $('#en-location'+id_location).css('display','block');
+                    $('.house'+id_location).css('display','none');
+                    $('#dislocation').attr('disabled','disabled');
                 }
             });
         }
@@ -362,6 +364,8 @@ $(document).ready(function(){
                     $('#status-location'+id_location).text(' ');
                     $('#dis-location'+id_location).css('display','block');
                     $('#en-location'+id_location).css('display','none');
+                    $('#dislocation').removeAttr('disabled');
+
                 }
             });
         }

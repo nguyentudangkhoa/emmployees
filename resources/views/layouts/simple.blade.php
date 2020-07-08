@@ -79,7 +79,7 @@
                 <tbody>
                 @foreach ($array as $value)
                 @if($value->location_dis != 1)
-                  <tr id="house{{$value->id}}">
+                  <tr class="house{{$value->id_location}}">
                     <td>{{$value->id}}</td>
                     <td>{{$value->house_name}}</td>
                     <td>{{$value->house_type}}</td>
