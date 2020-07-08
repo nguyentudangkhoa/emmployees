@@ -97,10 +97,10 @@
                     <td>
                         <div class="btn-group">
                             @if($value->disable != 1)
-                            <input type="submit" id="dis-house{{ $value->id }}" class="del-house-form btn btn-danger" data-idhouse="{{$value->id}}" value="Delete" data-toggle="modal" data-target="#modal-house">
+                            <input type="submit" id="dis-house{{ $value->id }}" class="del-house-form btn btn-danger" data-idhouse="{{$value->id}}" value="Delete" data-toggle="modal" data-target="#modal-house-sm">
                             <input type="submit" id="en-house{{ $value->id }}" data-message="Do you wan to enable this house" class="en-house btn btn-success" data-idhouse="{{$value->id}}" data-token="{{ csrf_token() }}" value="Enable" style="display: none">
                             @else
-                            <input type="submit" id="dis-house{{ $value->id }}" class="del-house-form btn btn-danger" data-idhouse="{{$value->id}}" value="Delete" data-toggle="modal" data-target="#modal-house" style="display: none">
+                            <input type="submit" id="dis-house{{ $value->id }}" class="del-house-form btn btn-danger" data-idhouse="{{$value->id}}" value="Delete" data-toggle="modal" data-target="#modal-house-sm" style="display: none">
                             <input type="submit" id="en-house{{ $value->id }}" data-message="Do you wan to enable this house" class="en-house btn btn-success" data-idhouse="{{$value->id}}" data-token="{{ csrf_token() }}" value="Enable">
                             @endif
                             <form action="{{route('House-edit',$value->id)}}" method="get">
@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <div class="modal fade" id="modal-house">
+      <div class="modal fade" id="modal-house-sm">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header">
