@@ -270,7 +270,6 @@ $(document).ready(function(){
                     $('#dis-location'+id_location).css('display','none');
                     $('#en-location'+id_location).css('display','block');
                     $('.house'+id_location).css('display','none');
-                    $('#modal-sm').hide();
                 }
             });
         }
